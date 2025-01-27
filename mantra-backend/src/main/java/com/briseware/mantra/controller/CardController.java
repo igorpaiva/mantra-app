@@ -37,4 +37,9 @@ public class CardController {
     public void delete(@PathVariable(value = "id") Long id) {
         cardService.delete(id);
     }
+
+    @DeleteMapping
+    public void deleteAll() {
+        cardService.deleteAll();
+    }
 }

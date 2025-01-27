@@ -8,5 +8,4 @@ public class CardDto {
     private String cardNumber;
     private String term;
     private String definition;
-//    private long deckId;
 }

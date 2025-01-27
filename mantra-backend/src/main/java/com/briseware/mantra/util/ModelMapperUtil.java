@@ -1,6 +1,7 @@
 package com.briseware.mantra.util;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.modelmapper.convention.MatchingStrategies;
 
 import java.util.ArrayList;
@@ -14,7 +15,6 @@ public class ModelMapperUtil {
      * Model mapper.
      */
     protected static final ModelMapper MODEL_MAPPER = createModelMapper();
-
 
     private ModelMapperUtil() {
     }
@@ -38,7 +38,6 @@ public class ModelMapperUtil {
         return dests;
     }
 
-
     public static <D, S> Set<D> toSet(Set<S> items, Class<D> destClass) {
         final Set<D> dests = new HashSet<>();
 
@@ -46,6 +45,12 @@ public class ModelMapperUtil {
             items.forEach(item -> dests.add(mapTo(item, destClass)));
         }
         return dests;
+    }
+
+    public static <S, D> void updateNonNullFields(S source, D destination) {
+        ModelMapper mapper = createModelMapper();
+        mapper.getConfiguration().setSkipNullEnabled(true);
+        mapper.map(source, destination);
     }
 
 }
