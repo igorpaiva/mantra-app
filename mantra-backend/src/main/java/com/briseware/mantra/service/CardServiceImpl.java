@@ -38,10 +38,11 @@ public class CardServiceImpl implements CardService {
     }
 
     public CardDto update(Long id, CardDto cardDto) {
-        Card updatedCard = cardRepository.findById(id)
+        Card existingCard = cardRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Resource not found with id: " + id));
-        ModelMapperUtil.updateNonNullFields(cardDto, Card.class);
-        return ModelMapperUtil.mapTo(cardRepository.save(updatedCard), CardDto.class);
+        cardDto.setId(id);
+        ModelMapperUtil.updateNonNullFields(cardDto, existingCard);
+        return ModelMapperUtil.mapTo(cardRepository.save(existingCard), CardDto.class);
     }
 
     public void delete(Long id) {

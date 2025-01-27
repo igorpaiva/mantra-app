@@ -1,7 +1,6 @@
 package com.briseware.mantra.util;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.modelmapper.convention.MatchingStrategies;
 
 import java.util.ArrayList;

@@ -1,5 +1,6 @@
 package com.briseware.mantra.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,4 +13,8 @@ public class Card {
     private int cardNumber;
     private String term;
     private String definition;
+    @ManyToOne
+    @JoinColumn(name = "deck_id")
+    @JsonBackReference
+    private Deck deck;
 }
