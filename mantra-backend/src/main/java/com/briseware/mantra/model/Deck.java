@@ -10,7 +10,7 @@ import java.util.List;
 public class Deck {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     private String description;
     @OneToMany(mappedBy = "deck", cascade = CascadeType.ALL, orphanRemoval = true)

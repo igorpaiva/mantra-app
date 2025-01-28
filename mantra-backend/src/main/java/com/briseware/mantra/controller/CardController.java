@@ -10,8 +10,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/card")
 public class CardController {
+
+    private final CardService cardService;
+
     @Autowired
-    private CardService cardService;
+    public CardController(CardService cardService) {
+        this.cardService = cardService;
+    }
 
     @GetMapping
     public List<CardDto> getAll() {

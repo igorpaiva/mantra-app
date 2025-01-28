@@ -9,7 +9,7 @@ import lombok.Data;
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private int cardNumber;
     private String term;
     private String definition;

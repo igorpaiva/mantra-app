@@ -13,7 +13,6 @@ import java.util.List;
 @Service
 public class CardServiceImpl implements CardService {
 
-
     private final CardRepository cardRepository;
 
     @Autowired
@@ -28,7 +27,7 @@ public class CardServiceImpl implements CardService {
 
     public CardDto get(Long id) {
         Card retrievedCard = cardRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID."));
+                .orElseThrow(() -> new ResourceNotFoundException("No card found with id: " + id));
         return ModelMapperUtil.mapTo(retrievedCard, CardDto.class);
     }
 
@@ -39,7 +38,7 @@ public class CardServiceImpl implements CardService {
 
     public CardDto update(Long id, CardDto cardDto) {
         Card existingCard = cardRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Resource not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("No card found with id: " + id));
         cardDto.setId(id);
         ModelMapperUtil.updateNonNullFields(cardDto, existingCard);
         return ModelMapperUtil.mapTo(cardRepository.save(existingCard), CardDto.class);
@@ -47,7 +46,7 @@ public class CardServiceImpl implements CardService {
 
     public void delete(Long id) {
         Card deleteCard = cardRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Resource not found with id: " + id));;
+                .orElseThrow(() -> new ResourceNotFoundException("No card found with id: " + id));;
         cardRepository.delete(deleteCard);
     }
 
