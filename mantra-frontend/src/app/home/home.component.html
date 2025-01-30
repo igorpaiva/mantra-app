@@ -1,0 +1,11 @@
+<h3>Decks</h3>
+
+@if (!deckItems().length) {
+    <p>Loading...</p>
+}
+
+<p>
+    @for (deck of deckItems(); track deck.id) {
+        <app-deck-item [deck]="deck"></app-deck-item>
+    }
+</p>
