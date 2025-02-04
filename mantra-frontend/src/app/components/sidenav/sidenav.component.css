@@ -1,23 +1,12 @@
-.drawer-container {
-    height: 100vh;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-  }
-  
+.sidenav-container {
+    /* width: auto; */
+    height: 1000px;
+    transition: width 0.3s;
+    background: #ffffff;
+
+}
+
 .sidenav {
-    background: #f4f4f4;
+    background: #ffffff;
     transition: width 0.3s;
 }
-
-.example-sidenav-content {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-}
-
-.span {
-    font-size: 20px;
-    font-weight: 500;
-    color: #000;
-}
-

@@ -3,10 +3,11 @@ import { DeckService } from '../services/deck.service';
 import { Deck } from '../model/deck.type';
 import { catchError } from 'rxjs';
 import { DeckItemComponent } from '../components/deck-item/deck-item.component';
+import { SidenavComponent } from '../components/sidenav/sidenav.component';
 
 @Component({
   selector: 'app-home',
-  imports: [ DeckItemComponent],
+  imports: [ DeckItemComponent, SidenavComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
