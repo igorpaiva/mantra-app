@@ -6,7 +6,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HomeComponent, SidenavComponent, ToolbarComponent],
+  imports: [RouterOutlet, HomeComponent, ToolbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

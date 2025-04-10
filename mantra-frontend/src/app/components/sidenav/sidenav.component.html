@@ -1,9 +1,6 @@
 <mat-drawer-container class="sidenav-container" [style.width.px]="isExpanded ? 200 : 60">
     <mat-drawer #drawer class="sidenav" mode="side" opened [style.width.px]="isExpanded ? 200 : 60">
         <mat-nav-list>
-            <mat-list-item (click)="toggleSidenav()">
-                <mat-icon matListItemIcon>menu</mat-icon>
-            </mat-list-item>
             <mat-list-item>
                 <mat-icon matListItemIcon>home</mat-icon>
                 @if (isExpanded) {
