@@ -1,6 +1,9 @@
 .deck-card {
-    max-width: 250px;
-    margin: 16px;
+    display: flex;
+    width: 348px;
+    height: 88px;
+    /* margin: 16px; */
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
@@ -12,18 +15,12 @@
 }
 
 mat-card-title {
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 900;
 }
 
 mat-card-content {
     /* height: 80px; */
-}
-
-.card-count {
-    color: #666;
-    font-size: 14px;
-    margin-top: 8px;
 }
 
 mat-card-actions {
@@ -37,4 +34,69 @@ mat-card {
     border-radius: 8px;
     overflow: hidden;
     transition: box-shadow 0.3s;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 100,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 36;
+}
+
+.deck-card {
+    max-width: 350px;
+    /* margin: 16px; */
+    margin: 0 16px 16px 0;
+    padding: 16px;
+}
+
+.card-container {
+    display: flex;
+    /* align-items: center; */
+}
+
+/* Icon Square */
+.icon-square {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    /* Prevents shrinking */
+    background-color: #dfbbdb;
+    /* Light blue background */
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 16px;
+    /* Padding between icon and content */
+}
+
+/* Card Content */
+.card-content {
+    /* center content vertically */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: 900;
+    margin-bottom: 4px;
+}
+
+.card-count {
+    font-size: 16px;
+    color: #000;
+    font-weight: 400;
+}
+
+/* Card Actions */
+mat-card-actions {
+    display: flex;
+    justify-content: flex-start;
+    padding: 8px 0 0 72px;
+    /* Aligns with content, accounting for icon width + padding */
 }

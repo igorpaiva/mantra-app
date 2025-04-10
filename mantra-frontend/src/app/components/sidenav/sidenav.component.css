@@ -15,3 +15,9 @@
 mat-icon {
     padding-left: 8px;
 }
+
+.sidenav-font {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}

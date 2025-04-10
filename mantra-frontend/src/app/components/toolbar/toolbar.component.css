@@ -1,10 +1,26 @@
 .example-spacer {
-    flex: 1 1 auto;
-    padding-left: 50px;
-  }
+  flex: 1 1 auto;
+  padding-left: 50px;
+}
 
-  mat-toolbar {
-    background-color: white;
-    color: #333; /* Dark text for better contrast on white background */
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); Optional: adds a subtle shadow for depth */
-  }
+mat-toolbar {
+  background-color: white;
+  color: #333;
+  /* Dark text for better contrast on white background */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); Optional: adds a subtle shadow for depth */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 8px;
+}
+
+.logo {
+  height: 30px;
+  /* Adjust height as needed */
+  width: auto;
+  /* Maintain aspect ratio */
+  transform: scaleX(-1);
+}
