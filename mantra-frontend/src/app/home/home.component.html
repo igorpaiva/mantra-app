@@ -1,14 +1,16 @@
 <div class="home-container">
     <app-sidenav></app-sidenav>
-    <h3>Decks</h3>
-
-    @if (!deckItems().length) {
+    <div class="content-area">
+      <h3 class="section-title">My flashcard sets</h3>
+  
+      @if (!deckItems().length) {
         <p>Loading...</p>
-    }
-
-    <p>
+      }
+  
+      <div class="deck-grid">
         @for (deck of deckItems(); track deck.id) {
-            <app-deck-item [deck]="deck"></app-deck-item>
+          <app-deck-item [deck]="deck"></app-deck-item>
         }
-    </p>
-</div>
+      </div>
+    </div>
+  </div>
