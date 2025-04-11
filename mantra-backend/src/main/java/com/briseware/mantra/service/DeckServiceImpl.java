@@ -64,7 +64,15 @@ public class DeckServiceImpl implements DeckService {
                 .orElseThrow(() -> new ResourceNotFoundException("No deck found with id: " + id));
         deckDto.setId(existingDeck.getId());
         for (CardDto cardDto : deckDto.getCards()) {
-            cardService.update(cardDto.getId(), cardDto);
+            if (cardDto.getId() != null) {
+                cardService.update(cardDto.getId(), cardDto);
+            }
+            else
+            {
+                Card newCard = ModelMapperUtil.mapTo(cardDto, Card.class);
+                newCard.setDeck(existingDeck);
+                cardService.createFromDeck(newCard);
+            }
         }
         ModelMapperUtil.updateNonNullFields(deckDto, existingDeck);
         DeckDto returnDto = ModelMapperUtil.mapTo(deckRepository.save(existingDeck), DeckDto.class);

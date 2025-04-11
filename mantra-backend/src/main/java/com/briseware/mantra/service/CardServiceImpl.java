@@ -25,6 +25,10 @@ public class CardServiceImpl implements CardService {
         return ModelMapperUtil.mapTo(cardRepository.save(card), CardDto.class);
     }
 
+    public CardDto createFromDeck(Card card) {
+        return ModelMapperUtil.mapTo(cardRepository.save(card), CardDto.class);
+    }
+
     public CardDto get(Long id) {
         Card retrievedCard = cardRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No card found with id: " + id));
