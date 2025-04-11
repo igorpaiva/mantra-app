@@ -9,25 +9,96 @@
 }
 
 /* Set specific weights for different elements if needed */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 700;
 }
 
-body, p, span, div, button {
+h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 800 !important;
+  color: #000;
+}
+
+body,
+p,
+div,
+button {
   font-family: 'Nunito Sans', sans-serif;
-  font-weight: 400;
+  font-weight: 500;
+}
+
+span {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 700;
+}
+
+button-hover {
+  background-color: #FFC8DD !important;
+  color: #000 !important;
+  border-radius: 16px !important;
 }
 
 /* Specifically target Angular Material */
+
+mat-icon {
+  color: #636363 !important;
+}
+
 .mat-typography {
   font-family: 'Nunito Sans', sans-serif !important;
 }
 
-.mat-mdc-button, .mat-mdc-card, .mat-mdc-dialog-container, .mat-mdc-form-field {
+.mat-mdc-button,
+.mat-mdc-card,
+.mat-mdc-dialog-container,
+.mat-mdc-form-field {
   font-family: 'Nunito Sans', sans-serif !important;
 }
 
-mat-icon {
-    color: #5f6368 !important;
-  }
+/* Material menu styles */
+.mat-mdc-menu-panel {
+  min-width: 200px !important;
+  border-radius: 8px !important;
+  background-color: #ffffff !important;
+}
+
+.mat-mdc-menu-item {
+  height: 48px !important;
+  font-size: 16px !important;
+}
+
+.mat-mdc-menu-item .mat-icon {
+  margin-right: 16px !important;
+}
+
+.mat-mdc-menu-item-text {
+  color: #000 !important;
+  font-weight: 600 !important;
+}
+
+/* Material Cards */
+
+.mat-mdc-card {
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.mat-mdc-card-content {
+  background-color: #ffffff !important;
+  /* border: solid; */
+  border-radius: 10px !important;
+  border-color: #636363 !important;
+}
+
+.mat-mdc-raised-button {
+  background-color: #FFC8DD !important;
+  color: #000 !important;
+  border-radius: 16px !important;
+}

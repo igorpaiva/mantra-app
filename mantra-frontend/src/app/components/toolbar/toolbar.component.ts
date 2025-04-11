@@ -1,19 +1,22 @@
 import { Component } from '@angular/core';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { RouterLink } from '@angular/router';
 import { SidenavService } from '../../services/sidenav.service';
 
 @Component({
   selector: 'app-toolbar',
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule],
+  standalone: true,
+  imports: [MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, RouterLink],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.css'
 })
 export class ToolbarComponent {
-  
+
   constructor(private sidenavService: SidenavService) { }
-  
+
   toggleSidenav() {
     this.sidenavService.toggle();
   }

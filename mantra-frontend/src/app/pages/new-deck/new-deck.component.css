@@ -1,0 +1,38 @@
+.new-deck-container {
+    display: flex;
+    height: calc(100vh - 64px);
+    /* Adjust based on your toolbar height */
+}
+
+.content-area {
+    display: block;
+    /* flex: 1; */
+    padding: 20px;
+    overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    max-width: 1220px;
+}
+
+.form-card {
+    /* max-width: 800px; */
+    margin: 0 auto;
+}
+
+.full-width {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.button-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+h2 {
+    margin-bottom: 24px;
+    font-weight: 500;
+}

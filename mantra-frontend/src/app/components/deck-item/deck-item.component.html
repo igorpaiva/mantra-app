@@ -1,15 +1,12 @@
 <mat-card class="deck-card">
-    <div class="card-container">
-        <!-- Icon Square -->
-        <div class="icon-square">
-          <mat-icon class="material-symbols-outlined">style</mat-icon>
-        </div>
-        
-        <!-- Card Content -->
-        <div class="card-content">
-          <div class="title">{{ deck().name }}</div>
-          <!-- <div class="description">{{ deck().description }}</div> -->
-          <div class="card-count">Status • {{ deck().cards.length }} cards • by User</div>
-        </div>
-      </div>
-  </mat-card>
+  <div class="card-container">
+    <div class="icon-square">
+      <mat-icon class="material-symbols-outlined">style</mat-icon>
+    </div>
+
+    <div class="card-content">
+      <div class="title">{{ deck().name }}</div>
+      <div class="card-count">Status • {{ deck().cards.length }} cards • by User</div>
+    </div>
+  </div>
+</mat-card>

@@ -1,0 +1,26 @@
+<div class="new-deck-container">
+  <div class="content-area">
+    <h3>Create New Deck</h3>
+
+    <mat-card class="form-card">
+      <mat-card-content>
+        <form>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Deck Name</mat-label>
+            <input matInput placeholder="Enter deck name">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="Enter deck description" rows="4"></textarea>
+          </mat-form-field>
+
+          <div class="button-row">
+            <button mat-button routerLink="/home">Cancel</button>
+            <button mat-raised-button color="primary">Create Deck</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

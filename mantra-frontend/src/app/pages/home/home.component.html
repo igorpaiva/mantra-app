@@ -1,0 +1,15 @@
+<div class="home-container">
+  <div class="content-area">
+    <h3 class="section-title">My flashcard sets</h3>
+
+    @if (!deckItems().length) {
+    <p>Loading...</p>
+    }
+
+    <div class="deck-grid">
+      @for (deck of deckItems(); track deck.id) {
+      <app-deck-item [deck]="deck"></app-deck-item>
+      }
+    </div>
+  </div>
+</div>
