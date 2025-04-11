@@ -1,15 +1,33 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { Deck } from '../model/deck.type';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Deck, CreateDeckRequest } from '../model/deck.type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeckService {
-  http = inject(HttpClient);
-  getDecks() {
-    const url = 'http://localhost:8080/api/v1/deck';
-    // const url = 'https://679bea0933d31684632583b8.mockapi.io/api/v1/deck'
-    return this.http.get<Array<Deck>>(url);
+  private apiUrl = 'http://localhost:8080/api/v1';
+
+  constructor(private http: HttpClient) { }
+
+  getDecks(): Observable<Deck[]> {
+    return this.http.get<Deck[]>(`${this.apiUrl}/deck`);
+  }
+
+  getDeck(id: string): Observable<Deck> {
+    return this.http.get<Deck>(`${this.apiUrl}/deck/${id}`);
+  }
+
+  createDeck(deck: CreateDeckRequest): Observable<Deck> {
+    return this.http.post<Deck>(`${this.apiUrl}/deck`, deck);
+  }
+
+  updateDeck(id: string, deck: CreateDeckRequest): Observable<Deck> {
+    return this.http.put<Deck>(`${this.apiUrl}/deck/${id}`, deck);
+  }
+
+  deleteDeck(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/deck/${id}`);
   }
 }

@@ -1,26 +1,62 @@
 <div class="new-deck-container">
   <div class="content-area">
-    <h3>Create New Deck</h3>
+    <h2>Create New Deck</h2>
 
-    <mat-card class="form-card">
-      <mat-card-content>
-        <form>
+    <form #deckForm="ngForm" (ngSubmit)="createDeck()">
+      <mat-card class="form-card">
+        <mat-card-content>
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Deck Name</mat-label>
-            <input matInput placeholder="Enter deck name">
+            <input matInput placeholder="Enter deck name" name="deckName" [(ngModel)]="deckName" required>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Description</mat-label>
-            <textarea matInput placeholder="Enter deck description" rows="4"></textarea>
+            <textarea matInput placeholder="Enter deck description" rows="4" name="deckDescription"
+              [(ngModel)]="deckDescription"></textarea>
           </mat-form-field>
+        </mat-card-content>
+      </mat-card>
 
-          <div class="button-row">
-            <button mat-button routerLink="/home">Cancel</button>
-            <button mat-raised-button color="primary">Create Deck</button>
+      <h3>Cards</h3>
+
+      <div class="cards-container">
+        @for (card of cards; track card.id) {
+        <div class="card-item">
+          <div class="split-card">
+            <div class="card-side term-side">
+              <div class="auto-resize-container">
+                <textarea [(ngModel)]="card.term" [name]="'term_' + card.id" placeholder="Enter term"
+                  class="auto-resize-input" (input)="adjustTextareaHeight($event)"></textarea>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="card-side definition-side">
+              <div class="auto-resize-container">
+                <textarea [(ngModel)]="card.definition" [name]="'definition_' + card.id" placeholder="Enter definition"
+                  class="auto-resize-input" (input)="adjustTextareaHeight($event)"></textarea>
+              </div>
+            </div>
           </div>
-        </form>
-      </mat-card-content>
-    </mat-card>
+          <button mat-icon-button type="button" class="remove-card" (click)="removeCard(card.id)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        }
+
+        <div class="add-card-container">
+          <button mat-fab type="button" class="add-card-button" (click)="addNewCard()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="submit-area">
+        <button mat-raised-button type="button" routerLink="/home" [disabled]="isSubmitting">Cancel</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting">
+          {{ isSubmitting ? 'Creating...' : 'Create Deck' }}
+        </button>
+      </div>
+    </form>
   </div>
 </div>

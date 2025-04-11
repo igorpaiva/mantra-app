@@ -19,9 +19,16 @@ h6 {
   font-weight: 700;
 }
 
-h3 {
+h2 {
   margin-bottom: 20px;
   font-size: 24px;
+  font-weight: 800 !important;
+  color: #000;
+}
+
+h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
   font-weight: 800 !important;
   color: #000;
 }
