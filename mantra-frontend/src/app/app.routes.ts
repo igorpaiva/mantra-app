@@ -6,4 +6,6 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'new-deck', component: NewDeckComponent },
+  { path: 'edit-deck/:id', component: NewDeckComponent }, // Reuse the NewDeckComponent for editing
+  { path: '**', redirectTo: '' }
 ];

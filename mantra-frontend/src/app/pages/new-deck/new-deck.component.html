@@ -1,8 +1,8 @@
 <div class="new-deck-container">
   <div class="content-area">
-    <h2>Create New Deck</h2>
+    <h2>{{ isEditMode ? 'Edit Deck' : 'Create New Deck' }}</h2>
 
-    <form #deckForm="ngForm" (ngSubmit)="createDeck()">
+    <form #deckForm="ngForm" (ngSubmit)="saveDeck()">
       <mat-card class="form-card">
         <mat-card-content>
           <mat-form-field appearance="outline" class="full-width">
@@ -38,7 +38,7 @@
               </div>
             </div>
           </div>
-          <button mat-icon-button type="button" class="remove-card" (click)="removeCard(card.id)">
+          <button mat-icon-button type="button" class="remove-card" (click)="removeCard(card.id!)">
             <mat-icon>close</mat-icon>
           </button>
         </div>
@@ -54,7 +54,8 @@
       <div class="submit-area">
         <button mat-raised-button type="button" routerLink="/home" [disabled]="isSubmitting">Cancel</button>
         <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting">
-          {{ isSubmitting ? 'Creating...' : 'Create Deck' }}
+          {{ isSubmitting ? (isEditMode ? 'Updating...' : 'Creating...') : (isEditMode ? 'Update Deck' : 'Create Deck')
+          }}
         </button>
       </div>
     </form>

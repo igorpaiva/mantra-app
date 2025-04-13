@@ -1,12 +1,29 @@
-<mat-card class="deck-card">
-  <div class="card-container">
-    <div class="icon-square">
-      <mat-icon class="material-symbols-outlined">style</mat-icon>
+<mat-card class="deck-card" (click)="$event.stopPropagation()">
+  <div class="card-header">
+    <div class="card-container">
+      <div class="icon-square">
+        <mat-icon class="material-symbols-outlined">style</mat-icon>
+      </div>
+
+      <div class="card-content">
+        <div class="title">{{ deck().name }}</div>
+        <div class="card-count">Status • {{ deck().cards.length }} cards • by User</div>
+      </div>
     </div>
 
-    <div class="card-content">
-      <div class="title">{{ deck().name }}</div>
-      <div class="card-count">Status • {{ deck().cards.length }} cards • by User</div>
-    </div>
+    <button mat-icon-button class="menu-button" [matMenuTriggerFor]="deckMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
   </div>
+
+  <mat-menu #deckMenu="matMenu">
+    <button mat-menu-item (click)="onStudy()">
+      <mat-icon>school</mat-icon>
+      <span>Study</span>
+    </button>
+    <button mat-menu-item (click)="onEdit()">
+      <mat-icon>edit</mat-icon>
+      <span>Edit</span>
+    </button>
+  </mat-menu>
 </mat-card>

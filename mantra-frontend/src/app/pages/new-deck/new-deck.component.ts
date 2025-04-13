@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -11,6 +11,7 @@ import { Router, RouterLink } from '@angular/router';
 import { CreateDeckRequest } from '../../model/deck.type';
 import { Card } from '../../model/card.type';
 import { DeckService } from '../../services/deck.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-deck',
@@ -36,17 +37,56 @@ export class NewDeckComponent {
   nextId = 1;
   isSubmitting = false;
 
+  isEditMode = false;
+  deckId: string | null = null;
+
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private deckService: DeckService,
     private snackBar: MatSnackBar
   ) { }
 
+  ngOnInit() {
+    // Check if we're in edit mode by looking for an ID parameter
+    this.route.paramMap.subscribe(params => {
+      this.deckId = params.get('id');
+
+      if (this.deckId) {
+        this.isEditMode = true;
+        this.loadDeckForEditing(this.deckId);
+      }
+    });
+  }
+
+  loadDeckForEditing(id: string) {
+    this.deckService.getDeck(id).subscribe({
+      next: (deck) => {
+        this.deckName = deck.name;
+        this.deckDescription = deck.description;
+
+        // Convert cards to our local format with IDs for tracking
+        this.cards = deck.cards.map(card => ({
+          id: card.id,
+          term: card.term,
+          definition: card.definition,
+          deckId: deck.id
+        }));
+        console.log('Loaded deck for editing:', this.cards);
+      },
+      error: (error) => {
+        console.error('Error loading deck for editing:', error);
+        this.snackBar.open('Failed to load deck for editing', 'Close', { duration: 3000 });
+        this.router.navigate(['/home']);
+      }
+    });
+  }
+
   addNewCard() {
     this.cards.push({
-      id: this.nextId++,
       term: '',
-      definition: ''
+      definition: '',
+      deckId: this.isEditMode ? +this.deckId! : undefined // This will be set when the deck is created
     });
   }
 
@@ -65,9 +105,11 @@ export class NewDeckComponent {
     const formattedCards = this.cards
       .filter(card => card.term.trim() || card.definition.trim()) // Keep cards with at least term or definition
       .map((card, index) => ({
+        id: this.isEditMode ? card.id : undefined,
         cardNumber: index + 1,
         term: card.term.trim(),
-        definition: card.definition.trim()
+        definition: card.definition.trim(),
+        deckId: this.isEditMode ? card.deckId : undefined // Only set deckId if in edit mode
       }));
 
     return {
@@ -77,7 +119,7 @@ export class NewDeckComponent {
     };
   }
 
-  createDeck() {
+  saveDeck() {
     if (!this.deckName.trim()) {
       this.snackBar.open('Please enter a deck name', 'Close', { duration: 3000 });
       return;
@@ -86,15 +128,21 @@ export class NewDeckComponent {
     this.isSubmitting = true;
     const deckData = this.prepareDeckForSubmission();
 
-    this.deckService.createDeck(deckData).subscribe({
-      next: (createdDeck) => {
-        this.snackBar.open('Deck created successfully!', 'Close', { duration: 3000 });
+    // Choose whether to create or update based on edit mode
+    const saveOperation = this.isEditMode && this.deckId
+      ? this.deckService.updateDeck(this.deckId, deckData)
+      : this.deckService.createDeck(deckData);
+
+    saveOperation.subscribe({
+      next: (result) => {
+        const message = this.isEditMode ? 'Deck updated successfully!' : 'Deck created successfully!';
+        this.snackBar.open(message, 'Close', { duration: 3000 });
         this.router.navigate(['/home']);
       },
       error: (error) => {
-        console.error('Error creating deck:', error);
+        console.error(`Error ${this.isEditMode ? 'updating' : 'creating'} deck:`, error);
         this.isSubmitting = false;
-        this.snackBar.open('Failed to create deck. Please try again.', 'Close', { duration: 3000 });
+        this.snackBar.open(`Failed to ${this.isEditMode ? 'update' : 'create'} deck. Please try again.`, 'Close', { duration: 3000 });
       }
     });
   }

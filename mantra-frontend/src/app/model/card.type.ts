@@ -1,6 +1,7 @@
 export type Card = {
-    id: number;
+    id?: number;
     term: string;
     definition: string;
     cardNumber?: number;
+    deckId?: number;
 }
