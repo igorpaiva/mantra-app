@@ -26,4 +26,10 @@ export class HomeComponent implements OnInit {
         this.deckItems.set(decks);
       });
   }
+
+  onDeckDeleted(deckId: string) {
+    this.deckItems.update(decks =>
+      decks.filter(deck => String(deck.id) !== String(deckId))
+    );
+  }
 }

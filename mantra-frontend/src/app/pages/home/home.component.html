@@ -8,7 +8,7 @@
 
     <div class="deck-grid">
       @for (deck of deckItems(); track deck.id) {
-      <app-deck-item [deck]="deck"></app-deck-item>
+      <app-deck-item [deck]="deck" (deckDeleted)="onDeckDeleted($event)"></app-deck-item>
       }
     </div>
   </div>

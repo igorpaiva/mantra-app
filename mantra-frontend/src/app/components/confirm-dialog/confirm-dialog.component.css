@@ -1,0 +1,26 @@
+:host {
+    display: block;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
+    padding: 16px 24px 16px;
+}
+
+.mat-dialog-content {
+    margin: 0;
+    padding: 0 24px 20px 24px;
+    color: rgba(0, 0, 0, 0.75) !important;
+}
+
+h2 {
+    color: black !important;
+    font-size: 20px;
+}
+
+p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.54) !important;
+}

@@ -91,3 +91,7 @@ mat-card-actions {
     justify-content: flex-start;
     padding: 8px 0 0 72px;
 }
+
+.color-red {
+    color: #f44336 !important;
+}
