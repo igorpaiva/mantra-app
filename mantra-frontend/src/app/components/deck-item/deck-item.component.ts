@@ -41,8 +41,7 @@ export class DeckItemComponent {
   }
 
   onStudy() {
-    console.log('Study deck:', this.deck().id);
-    // TODO: this.router.navigate(['/study', this.deck().id]);
+    this.router.navigate(['/study', this.deck().id]);
   }
 
   onDelete() {

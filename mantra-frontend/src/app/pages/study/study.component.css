@@ -1,0 +1,116 @@
+.study-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    height: calc(100vh - 64px);
+    display: flex;
+    flex-direction: column;
+}
+
+.study-header {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.card-counter {
+    color: #666;
+    margin-top: 8px;
+    font-size: 16px;
+}
+
+.card-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 48px;
+}
+
+/* Flashcard styles */
+.flashcard-container {
+    width: 100%;
+    max-width: 600px;
+    perspective: 1000px;
+}
+
+.flashcard-wrapper {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    margin-bottom: 32px;
+}
+
+.flashcard {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative;
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.card-content {
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+    color: #333;
+}
+
+/* Navigation controls */
+.navigation-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 32px;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.nav-button {
+    margin: 0 16px;
+}
+
+/* End actions */
+.end-actions {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.loading {
+    font-size: 18px;
+    color: #666;
+}
+
+.button-placeholder {
+    width: 56px;
+    height: 56px;
+}

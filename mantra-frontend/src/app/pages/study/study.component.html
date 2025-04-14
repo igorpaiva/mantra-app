@@ -1,0 +1,68 @@
+<div class="study-container">
+    <div class="study-header">
+        @if (deck()) {
+        <h1>Studying: {{ deck()!.name }}</h1>
+        }
+        @if (cards().length > 0) {
+        <div class="card-counter">
+            Card {{ currentCardIndex() + 1 }} of {{ cards().length }}
+        </div>
+        }
+    </div>
+
+    <div class="card-area">
+        @if (isLoading()) {
+        <div class="loading">Loading deck...</div>
+        }
+
+        @if (!isLoading() && currentCard()) {
+        <div class="flashcard-container">
+            <div class="flashcard-wrapper">
+                <div class="flashcard" (click)="flipCard()" [@flipState]="isFlipped() ? 'back' : 'front'">
+                    <div class="card-face front" [class.hidden]="isFlipped()">
+                        <div class="card-content">{{ currentCard()!.term }}</div>
+                    </div>
+
+                    <div class="card-face back" [class.hidden]="!isFlipped()">
+                        <div class="card-content">{{ currentCard()!.definition }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-controls">
+                @if (!isFirstCard()) {
+                <button mat-fab color="primary" class="nav-button" (click)="previousCard()">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                } @else {
+                <div class="button-placeholder"></div>
+                }
+
+                <div class="spacer"></div>
+
+                @if (!isLastCard()) {
+                <button mat-fab color="primary" class="nav-button" (click)="nextCard()">
+                    <mat-icon>arrow_forward</mat-icon>
+                </button>
+                } @else {
+                <div class="button-placeholder"></div>
+                }
+            </div>
+        </div>
+        }
+
+        @if (!isLoading() && isLastCard() && currentCard()) {
+        <div class="end-actions">
+            <p>You've reached the end of this deck!</p>
+            <div class="action-buttons">
+                <button mat-raised-button (click)="returnHome()">
+                    Back to Home
+                </button>
+                <button mat-raised-button color="primary" (click)="restartDeck()">
+                    Restart Deck
+                </button>
+            </div>
+        </div>
+        }
+    </div>
+</div>
