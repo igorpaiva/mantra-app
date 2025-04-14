@@ -11,6 +11,7 @@ import { Router, RouterLink } from '@angular/router';
 import { CreateDeckRequest } from '../../model/deck.type';
 import { Card } from '../../model/card.type';
 import { DeckService } from '../../services/deck.service';
+import { CardService } from '../../services/card.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -40,9 +41,12 @@ export class NewDeckComponent {
   isEditMode = false;
   deckId: string | null = null;
 
+  deletedCardIds: string[] = [];
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private cardService: CardService,
     private deckService: DeckService,
     private snackBar: MatSnackBar
   ) { }
@@ -91,8 +95,26 @@ export class NewDeckComponent {
   }
 
   removeCard(id: number) {
+    const cardToRemove = this.cards.find(card => card.id === id);
+    
+    if (cardToRemove && cardToRemove.id) {
+      if (this.isEditMode) {
+        this.deletedCardIds.push(cardToRemove.id.toString());
+        
+        this.cardService.deleteCard(cardToRemove.id.toString()).subscribe({
+          next: () => {
+            console.log(`Card ${cardToRemove.id?.toString()} deleted from server`);
+          },
+          error: (error) => {
+            console.error('Error deleting card:', error);
+            this.snackBar.open('Failed to delete card. It will be removed when you save the deck.', 'Close', { duration: 3000 });
+          }
+        });
+      }
+    }
+    
     this.cards = this.cards.filter(card => card.id !== id);
-  }
+  }  
 
   adjustTextareaHeight(event: Event) {
     const textarea = event.target as HTMLTextAreaElement;

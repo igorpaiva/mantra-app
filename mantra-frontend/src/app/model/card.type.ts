@@ -4,4 +4,5 @@ export type Card = {
     definition: string;
     cardNumber?: number;
     deckId?: number;
+    isDeleted?: boolean;
 }
