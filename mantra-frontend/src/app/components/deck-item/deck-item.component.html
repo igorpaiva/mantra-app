@@ -5,7 +5,7 @@
         <mat-icon class="material-symbols-outlined">style</mat-icon>
       </div>
 
-      <div class="card-content">
+      <div class="card-content" (click)="onStudy()">
         <div class="title">{{ deck().name }}</div>
         <div class="card-count">Status • {{ deck().cards.length }} cards • by User</div>
       </div>

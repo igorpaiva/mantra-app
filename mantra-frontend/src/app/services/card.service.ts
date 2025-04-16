@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardService {
-  private apiUrl = 'http://localhost:8080/api/v1';
+  private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
   deleteCard(cardId: string): Observable<any> {
