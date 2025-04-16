@@ -1,11 +1,12 @@
 {
     "name": "Mantra",
     "short_name": "Mantra",
-    "theme_color": "#1976d2",
+    "theme_color": "#ffffff",
     "background_color": "#fafafa",
     "display": "standalone",
-    "scope": "/",
-    "start_url": "/",
+    "orientation": "portrait",
+    "scope": "/mantra-app/",
+    "start_url": "/mantra-app/",
     "icons": [
         {
             "src": "assets/icons/icon-192x192.png",
@@ -16,12 +17,6 @@
             "src": "assets/icons/icon-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
-        },
-        {
-            "src": "assets/mantra-logo.svg",
-            "sizes": "any",
-            "type": "image/svg+xml",
-            "purpose": "any"
         }
     ]
 }
