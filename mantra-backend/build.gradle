@@ -28,8 +28,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	compileOnly 'org.projectlombok:lombok'
-		testCompileOnly 'org.projectlombok:lombok'
-		testAnnotationProcessor 'org.projectlombok:lombok'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -38,6 +38,26 @@ dependencies {
 	implementation 'org.modelmapper:modelmapper:2.1.1'
 	// H2 Database for tests
 	testImplementation 'com.h2database:h2'
+}
+
+bootJar {
+	manifest {
+		attributes 'Start-Class': 'com.briseware.mantra.MantraApplication' // Update with your actual main class
+	}
+
+	manifest {
+		attributes 'Spring-Profiles-Active': 'prod'
+	}
+}
+
+tasks.bootRun {
+	systemProperty 'spring.profiles.active', 'dev'
+}
+
+task bootRunProd(type: org.springframework.boot.gradle.tasks.run.BootRun) {
+	systemProperty 'spring.profiles.active', 'prod'
+	group = 'application'
+	description = 'Runs the application with the prod profile'
 }
 
 tasks.named('test') {
