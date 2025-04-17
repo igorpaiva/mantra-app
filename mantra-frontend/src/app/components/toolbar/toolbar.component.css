@@ -26,3 +26,18 @@ mat-toolbar {
   color: #ffffff !important;
   background-color: #ffffff;
 }
+
+@media (max-width: 640px) {
+  .menu-container {
+    color: #ffffff !important;
+    background-color: #ffffff;
+    
+  }
+
+  mat-toolbar {
+    background-color: white;
+    color: #333;
+    padding-left: 0px;
+    transform: translateY(40%);
+  }
+}

@@ -26,25 +26,14 @@
 }
 
 /* Flashcard styles */
-.flashcard-container {
-    width: 100%;
-    max-width: 800px;
-    perspective: 1000px;
-}
-
-.flashcard-wrapper {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    justify-items: center;
-}
-
 .flashcard {
     width: 80%;
-    height: 100%;
+    max-width: 600px;
+    height: 400px;
+    position: relative;
     transform-style: preserve-3d;
     cursor: pointer;
-    position: relative;
+    margin: 0 auto;
 }
 
 .card-face {
@@ -111,4 +100,37 @@
 .button-placeholder {
     width: 56px;
     height: 56px;
+}
+
+@media (max-width: 640px) {
+    .flashcard {
+        width: 100%;
+        max-width: 600px;
+        height: 240px;
+        position: relative;
+        transform-style: preserve-3d;
+        cursor: pointer;
+        margin: 0 auto;
+    }
+
+    .card-content {
+        font-size: 20px;
+        font-weight: 400;
+        text-align: center;
+        color: #333;
+    }
+
+    .navigation-controls {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        transform: translateY(20%);
+    }
+
+    :host {
+        display: block;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
 }

@@ -29,6 +29,7 @@ mat-card {
     border-radius: 8px;
     overflow: hidden;
     transition: box-shadow 0.3s;
+    min-width: 240px !important;
 }
 
 .material-symbols-outlined {
@@ -80,9 +81,15 @@ mat-card {
     margin-bottom: 4px;
 }
 
-.card-count {
+.subtitle {
+    display: flex;
     font-size: 16px;
     color: #000;
+    font-weight: 400;
+    white-space: pre-wrap;
+}
+
+.card-count {
     font-weight: 400;
 }
 
@@ -94,4 +101,31 @@ mat-card-actions {
 
 .color-red {
     color: #f44336 !important;
+}
+
+@media (max-width: 640px) {
+    .title {
+        max-width: 100px;
+        /* Limit title width */
+    }
+
+    .card-content {
+        padding-left: 0px;
+    }
+
+    mat-card-actions {
+        display: none;
+        /* Hide actions on small screens */
+    }
+
+    .status {
+        display: none;
+        /* Hide status on small screens */
+    }
+
+    .user {
+        display: none;
+        /* Hide user on small screens */
+    }
+
 }

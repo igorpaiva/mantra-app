@@ -16,3 +16,14 @@
   overflow-y: auto;
   background-color: #fff8f8;
 }
+
+@media (max-width: 640px) {
+  
+  /* Prevent body scrolling when in study mode on mobile */
+  :host {
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+}
