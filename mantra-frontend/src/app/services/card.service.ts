@@ -10,6 +10,10 @@ export class CardService {
   private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
+  createCard(card: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/card`, card);
+  }
+
   deleteCard(cardId: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/card/${cardId}`);
   }

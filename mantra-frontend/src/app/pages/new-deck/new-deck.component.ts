@@ -37,6 +37,7 @@ export class NewDeckComponent {
   cards: Card[] = [];
   nextId = 1;
   isSubmitting = false;
+  newCard: Card | null = null;
 
   isEditMode = false;
   deckId: string | null = null;
@@ -69,13 +70,17 @@ export class NewDeckComponent {
         this.deckName = deck.name;
         this.deckDescription = deck.description;
 
-        // Convert cards to our local format with IDs for tracking
         this.cards = deck.cards.map(card => ({
           id: card.id,
           term: card.term,
           definition: card.definition,
-          deckId: deck.id
+          deckId: deck.id,
+          cardNumber: card.cardNumber 
         }));
+
+        this.nextId = this.cards.length > 0
+          ? Math.max(...this.cards.map(card => card.cardNumber || 0)) + 1
+          : 1;
         console.log('Loaded deck for editing:', this.cards);
       },
       error: (error) => {
@@ -86,22 +91,33 @@ export class NewDeckComponent {
     });
   }
 
-  addNewCard() {
-    this.cards.push({
+  generateUniqueId(): number {
+    return Date.now();
+  }
+
+  addNewCard() {    
+    this.newCard = {
+      id: this.generateUniqueId(), // Only used for local identification
       term: '',
       definition: '',
-      deckId: this.isEditMode ? +this.deckId! : undefined // This will be set when the deck is created
-    });
+      cardNumber: this.nextId++,
+      isNew: true,
+      deckId: this.isEditMode ? +this.deckId! : undefined
+    };
+  
+    this.cards = [...this.cards, this.newCard];
   }
 
   removeCard(id: number) {
     const cardToRemove = this.cards.find(card => card.id === id);
-    
-    if (cardToRemove && cardToRemove.id) {
+
+    console.log('Removing card:', cardToRemove);
+
+    if (cardToRemove && !cardToRemove.isNew) {
       if (this.isEditMode) {
-        this.deletedCardIds.push(cardToRemove.id.toString());
-        
-        this.cardService.deleteCard(cardToRemove.id.toString()).subscribe({
+        this.deletedCardIds.push(cardToRemove.id!.toString());
+
+        this.cardService.deleteCard(cardToRemove.id!.toString()).subscribe({
           next: () => {
             console.log(`Card ${cardToRemove.id?.toString()} deleted from server`);
           },
@@ -112,9 +128,9 @@ export class NewDeckComponent {
         });
       }
     }
-    
+
     this.cards = this.cards.filter(card => card.id !== id);
-  }  
+  }
 
   adjustTextareaHeight(event: Event) {
     const textarea = event.target as HTMLTextAreaElement;
@@ -125,13 +141,13 @@ export class NewDeckComponent {
   prepareDeckForSubmission(): CreateDeckRequest {
     // Filter out empty cards and format according to backend requirements
     const formattedCards = this.cards
-      .filter(card => card.term.trim() || card.definition.trim()) // Keep cards with at least term or definition
+      .filter(card => card.term.trim() || card.definition.trim())
       .map((card, index) => ({
-        id: this.isEditMode ? card.id : undefined,
+        id: card.isNew ? undefined : card.id,
         cardNumber: index + 1,
         term: card.term.trim(),
         definition: card.definition.trim(),
-        deckId: this.isEditMode ? card.deckId : undefined // Only set deckId if in edit mode
+        deckId: this.isEditMode ? card.deckId : undefined
       }));
 
     return {

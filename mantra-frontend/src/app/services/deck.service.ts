@@ -22,13 +22,11 @@ export class DeckService {
   }
   
   createDeck(deck: CreateDeckRequest): Observable<Deck> {
-    const snakeCaseDeck = camelToSnakeCase(deck);
-    return this.http.post<Deck>(`${this.apiUrl}/deck`, snakeCaseDeck);
+    return this.http.post<Deck>(`${this.apiUrl}/deck`, deck);
   }
   
   updateDeck(id: string, deck: CreateDeckRequest): Observable<Deck> {
-    const snakeCaseDeck = camelToSnakeCase(deck);
-    return this.http.put<Deck>(`${this.apiUrl}/deck/${id}`, snakeCaseDeck);
+    return this.http.put<Deck>(`${this.apiUrl}/deck/${id}`, deck);
   }
   
   deleteDeck(id: string): Observable<void> {

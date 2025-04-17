@@ -27,14 +27,16 @@
             <div class="card-side term-side">
               <div class="auto-resize-container">
                 <textarea [(ngModel)]="card.term" [name]="'term_' + card.id" placeholder="Enter term"
-                  class="auto-resize-input" (input)="adjustTextareaHeight($event)"></textarea>
+                  class="auto-resize-input" (input)="adjustTextareaHeight($event)">
+                  </textarea>
               </div>
             </div>
             <div class="divider"></div>
             <div class="card-side definition-side">
               <div class="auto-resize-container">
                 <textarea [(ngModel)]="card.definition" [name]="'definition_' + card.id" placeholder="Enter definition"
-                  class="auto-resize-input" (input)="adjustTextareaHeight($event)"></textarea>
+                  class="auto-resize-input" (input)="adjustTextareaHeight($event)">
+                  </textarea>
               </div>
             </div>
           </div>
