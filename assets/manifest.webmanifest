@@ -9,7 +9,7 @@
     "start_url": "/mantra-app/",
     "icons": [
         {
-            "src": "assets/icons/icon-192x192.png",
+            "src": "icons/icon-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
