@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1744927802297,
+  "timestamp": 1744929412310,
   "index": "/mantra-app/index.html",
   "assetGroups": [
     {
@@ -11,10 +11,10 @@
         "ignoreVary": true
       },
       "urls": [
-        "/mantra-app/chunk-NJIUYBZE.js",
-        "/mantra-app/chunk-QRJG5U77.js",
+        "/mantra-app/chunk-LW27MTNZ.js",
+        "/mantra-app/chunk-SLQ3HZHY.js",
         "/mantra-app/index.html",
-        "/mantra-app/main-QC3WPNKJ.js",
+        "/mantra-app/main-XJWJGYN5.js",
         "/mantra-app/polyfills-FFHMD2TL.js",
         "/mantra-app/styles-FQNW3KH6.css"
       ],
@@ -126,10 +126,10 @@
     "/mantra-app/assets/icons/icon-512x512.png": "ee3093bb4eef3dcb23019dd1d8982b86e885d0b5",
     "/mantra-app/assets/mantra-logo-square.svg": "cf1a5e02c2aef28113831ddedcd0122c06ede2ce",
     "/mantra-app/assets/mantra-logo.svg": "306f75f80e799ecb98ebe3d09f01f861f3096bcf",
-    "/mantra-app/chunk-NJIUYBZE.js": "538310c8ac20b58bd1148c538e8e665a3e62303e",
-    "/mantra-app/chunk-QRJG5U77.js": "fc22236fc47208a6e1e1be4a0badf2fd117f752c",
-    "/mantra-app/index.html": "d3463ef70e5ec16dfe5b2aef648ac6b68ff5cc60",
-    "/mantra-app/main-QC3WPNKJ.js": "3ce15f660d156aab2e3a2e53b75220e2dd99d416",
+    "/mantra-app/chunk-LW27MTNZ.js": "337a12602717cd4baadaad48d1bbc41cc9bef893",
+    "/mantra-app/chunk-SLQ3HZHY.js": "f68e979aaa97297258fbb50cc4f835e3b3b411c6",
+    "/mantra-app/index.html": "c2878043a103d0c4084c2b6bf0aa641dbb83b8a1",
+    "/mantra-app/main-XJWJGYN5.js": "75a61938bc17aac1b123e1f5eb0a231032624c2d",
     "/mantra-app/polyfills-FFHMD2TL.js": "f49b49a155bc7d192db62a4c15d0a612b460a667",
     "/mantra-app/styles-FQNW3KH6.css": "0698c0f6370bbb0ee46063b062590b7a5452ad11"
   },
