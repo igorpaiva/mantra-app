@@ -95,7 +95,7 @@ public class DeckServiceImpl implements DeckService {
         for (Card card : savedDeck.getCards()) {
             card.setDeck(savedDeck);
             CardDto updatedCard = ModelMapperUtil.mapTo(cardRepository.save(card), CardDto.class);
-            updatedCard.setDeck_id(savedDeck.getId());
+            updatedCard.setDeckId(savedDeck.getId());
             updatedCards.add(updatedCard);
         }
         return updatedCards;
@@ -104,7 +104,7 @@ public class DeckServiceImpl implements DeckService {
     private List<CardDto> setCardsDtoDeckId(DeckDto deckDto) {
         List<CardDto> updatedCards = new ArrayList<>();
         for (CardDto cardDto : deckDto.getCards()) {
-            cardDto.setDeck_id(deckDto.getId());
+            cardDto.setDeckId(deckDto.getId());
             updatedCards.add(cardDto);
         }
         return updatedCards;
