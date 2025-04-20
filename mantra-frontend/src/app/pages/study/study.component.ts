@@ -9,6 +9,7 @@ import { DeckService } from '../../services/deck.service';
 import { Card } from '../../model/card.type';
 import { Deck } from '../../model/deck.type';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
   selector: 'app-study',
@@ -18,7 +19,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MarkdownComponent
   ],
   templateUrl: './study.component.html',
   styleUrl: './study.component.css',

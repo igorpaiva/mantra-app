@@ -34,6 +34,7 @@
     transform-style: preserve-3d;
     cursor: pointer;
     margin: 0 auto;
+    z-index: 2 ;
 }
 
 .card-face {
@@ -74,6 +75,7 @@
 
 .spacer {
     flex: 1;
+    z-index: 1;
 }
 
 .nav-button {

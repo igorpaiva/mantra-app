@@ -18,10 +18,14 @@
         @if (!isLoading() && currentCard()) {
         <div #flashcardElement class="flashcard" (click)="flipCard()" [@flipState]="isFlipped() ? 'back' : 'front'">
             <div class="card-face front">
-                <div class="card-content">{{ currentCard()!.term }}</div>
+                <div class="card-content">
+                    <markdown [data]="currentCard()!.term"></markdown>
+                </div>
             </div>
             <div class="card-face back">
-                <div class="card-content">{{ currentCard()!.definition }}</div>
+                <div class="card-content">
+                    <markdown [data]="currentCard()!.definition"></markdown>
+                </div>
             </div>
         </div>
         }

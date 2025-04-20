@@ -109,3 +109,21 @@ mat-icon {
   color: #000 !important;
   border-radius: 16px !important;
 }
+
+/* Markdown */
+
+.markdown-preview {
+  padding: 8px;
+  margin-top: 8px;
+  border-top: 1px dashed #ccc;
+  font-size: 14px;
+}
+
+/* Toggle button for preview */
+.preview-toggle {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #666;
+  cursor: pointer;
+  text-align: right;
+}

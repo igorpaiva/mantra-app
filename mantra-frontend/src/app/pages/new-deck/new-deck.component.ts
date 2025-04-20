@@ -13,6 +13,7 @@ import { Card } from '../../model/card.type';
 import { DeckService } from '../../services/deck.service';
 import { CardService } from '../../services/card.service';
 import { ActivatedRoute } from '@angular/router';
+import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
   selector: 'app-new-deck',
@@ -26,6 +27,7 @@ import { ActivatedRoute } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     RouterLink,
+    MarkdownComponent
   ],
   templateUrl: './new-deck.component.html',
   styleUrl: './new-deck.component.css'
@@ -43,6 +45,8 @@ export class NewDeckComponent {
   deckId: string | null = null;
 
   deletedCardIds: string[] = [];
+
+  showPreviews = true;
 
   constructor(
     private router: Router,
@@ -75,7 +79,7 @@ export class NewDeckComponent {
           term: card.term,
           definition: card.definition,
           deckId: deck.id,
-          cardNumber: card.cardNumber 
+          cardNumber: card.cardNumber
         }));
 
         this.nextId = this.cards.length > 0
@@ -95,7 +99,7 @@ export class NewDeckComponent {
     return Date.now();
   }
 
-  addNewCard() {    
+  addNewCard() {
     this.newCard = {
       id: this.generateUniqueId(), // Only used for local identification
       term: '',
@@ -104,7 +108,7 @@ export class NewDeckComponent {
       isNew: true,
       deckId: this.isEditMode ? +this.deckId! : undefined
     };
-  
+
     this.cards = [...this.cards, this.newCard];
   }
 
@@ -183,5 +187,9 @@ export class NewDeckComponent {
         this.snackBar.open(`Failed to ${this.isEditMode ? 'update' : 'create'} deck. Please try again.`, 'Close', { duration: 3000 });
       }
     });
+  }
+
+  togglePreviews() {
+    this.showPreviews = !this.showPreviews;
   }
 }

@@ -29,6 +29,9 @@
                 <textarea [(ngModel)]="card.term" [name]="'term_' + card.id" placeholder="Enter term"
                   class="auto-resize-input" (input)="adjustTextareaHeight($event)">
                   </textarea>
+                  <div class="markdown-preview">
+                    <markdown [data]="card.term"></markdown>
+                  </div>
               </div>
             </div>
             <div class="divider"></div>
@@ -37,6 +40,9 @@
                 <textarea [(ngModel)]="card.definition" [name]="'definition_' + card.id" placeholder="Enter definition"
                   class="auto-resize-input" (input)="adjustTextareaHeight($event)">
                   </textarea>
+                  <div class="markdown-preview">
+                    <markdown [data]="card.definition"></markdown>
+                  </div>
               </div>
             </div>
           </div>
