@@ -5,7 +5,7 @@
     <form #deckForm="ngForm" (ngSubmit)="saveDeck()">
       <mat-card class="form-card">
         <mat-card-content>
-          <mat-form-field appearance="outline" class="full-width">
+          <mat-form-field appearance="outline" class="full-width main-labels">
             <mat-label>Deck Name</mat-label>
             <input matInput placeholder="Enter deck name" name="deckName" [(ngModel)]="deckName" required>
           </mat-form-field>
@@ -26,23 +26,75 @@
           <div class="split-card">
             <div class="card-side term-side">
               <div class="auto-resize-container">
-                <textarea [(ngModel)]="card.term" [name]="'term_' + card.id" placeholder="Enter term"
+                <div class="markdown-toolbar">
+                  <button type="button" mat-icon-button (click)="insertMarkdown(card, 'term', '**', '**')"
+                    matTooltip="Bold">
+                    <mat-icon>format_bold</mat-icon>
+                  </button>
+                  <button type="button" mat-icon-button (click)="insertMarkdown(card, 'term', '*', '*')"
+                    matTooltip="Italic">
+                    <mat-icon>format_italic</mat-icon>
+                  </button>
+                  <button type="button" mat-icon-button (click)="insertMarkdown(card, 'term', '# ', '')"
+                    matTooltip="Heading">
+                    <mat-icon>title</mat-icon>
+                  </button>
+                  <button type="button" mat-icon-button (click)="insertList(card, 'term', true)"
+                    matTooltip="Bullet List">
+                    <mat-icon>format_list_bulleted</mat-icon>
+                  </button>
+                  <button type="button" mat-icon-button (click)="insertList(card, 'term', false)"
+                    matTooltip="Numbered List">
+                    <mat-icon>format_list_numbered</mat-icon>
+                  </button>
+                  <!-- <button type="button" mat-icon-button (click)="insertMarkdown(card, 'term', '$', '$')"
+                    matTooltip="Math Formula">
+                    <mat-icon>functions</mat-icon>
+                  </button> -->
+                </div>
+                <textarea #termTextarea [(ngModel)]="card.term" [name]="'term_' + card.id" placeholder="Enter term"
                   class="auto-resize-input" (input)="adjustTextareaHeight($event)">
-                  </textarea>
-                  <div class="markdown-preview">
-                    <markdown [data]="card.term"></markdown>
-                  </div>
+                </textarea>
+                <div class="markdown-preview">
+                  <markdown [data]="card.term"></markdown>
+                </div>
               </div>
             </div>
             <div class="divider"></div>
             <div class="card-side definition-side">
               <div class="auto-resize-container">
-                <textarea [(ngModel)]="card.definition" [name]="'definition_' + card.id" placeholder="Enter definition"
-                  class="auto-resize-input" (input)="adjustTextareaHeight($event)">
-                  </textarea>
-                  <div class="markdown-preview">
-                    <markdown [data]="card.definition"></markdown>
-                  </div>
+                <div class="markdown-toolbar">
+                  <button type="button" mat-icon-button (click)="insertMarkdown(card, 'definition', '**', '**')"
+                    matTooltip="Bold">
+                    <mat-icon>format_bold</mat-icon>
+                  </button>
+                  <button type="button" mat-icon-button (click)="insertMarkdown(card, 'definition', '*', '*')"
+                    matTooltip="Italic">
+                    <mat-icon>format_italic</mat-icon>
+                  </button>
+                  <button type="button" mat-icon-button (click)="insertMarkdown(card, 'definition', '# ', '')"
+                    matTooltip="Heading">
+                    <mat-icon>title</mat-icon>
+                  </button>
+                  <button type="button" mat-icon-button (click)="insertList(card, 'definition', true)"
+                    matTooltip="Bullet List">
+                    <mat-icon>format_list_bulleted</mat-icon>
+                  </button>
+                  <button type="button" mat-icon-button (click)="insertList(card, 'definition', false)"
+                    matTooltip="Numbered List">
+                    <mat-icon>format_list_numbered</mat-icon>
+                  </button>
+                  <!-- <button type="button" mat-icon-button (click)="insertMarkdown(card, 'term', '$', '$')"
+                    matTooltip="Math Formula">
+                    <mat-icon>functions</mat-icon>
+                  </button> -->
+                </div>
+                <textarea #definitionTextarea [(ngModel)]="card.definition" [name]="'definition_' + card.id"
+                  placeholder="Enter definition" class="auto-resize-input" (input)="adjustTextareaHeight($event)">
+                </textarea>
+                <div class="markdown-preview">
+                  <markdown [data]="card.definition"></markdown>
+                </div>
               </div>
             </div>
           </div>

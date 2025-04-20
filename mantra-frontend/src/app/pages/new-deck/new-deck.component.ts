@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -14,6 +14,7 @@ import { DeckService } from '../../services/deck.service';
 import { CardService } from '../../services/card.service';
 import { ActivatedRoute } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-new-deck',
@@ -27,12 +28,15 @@ import { MarkdownComponent } from 'ngx-markdown';
     MatButtonModule,
     MatIconModule,
     RouterLink,
-    MarkdownComponent
+    MarkdownComponent,
+    MatTooltipModule
   ],
   templateUrl: './new-deck.component.html',
   styleUrl: './new-deck.component.css'
 })
 export class NewDeckComponent {
+  @ViewChildren('termTextarea') termTextareas!: QueryList<ElementRef>;
+  @ViewChildren('definitionTextarea') definitionTextareas!: QueryList<ElementRef>;
   // Form data
   deckName: string = '';
   deckDescription: string = '';
@@ -191,5 +195,76 @@ export class NewDeckComponent {
 
   togglePreviews() {
     this.showPreviews = !this.showPreviews;
+  }
+
+  insertMarkdown(card: Card, field: 'term' | 'definition', prefix: string, suffix: string): void {
+    // Get the textarea element
+    const textareas = field === 'term' ? this.termTextareas : this.definitionTextareas;
+    const textareaIndex = this.cards.findIndex(c => c.id === card.id);
+    if (textareaIndex === -1) return;
+
+    const textarea = textareas.toArray()[textareaIndex]?.nativeElement as HTMLTextAreaElement;
+    if (!textarea) return;
+
+    // Get current selection
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = card[field].substring(start, end);
+
+    // Create the new text with markdown
+    const newText = card[field].substring(0, start) +
+      prefix + selectedText + suffix +
+      card[field].substring(end);
+
+    // Update model and selection
+    card[field] = newText;
+
+    // Set focus back to textarea
+    setTimeout(() => {
+      textarea.focus();
+      textarea.selectionStart = start + prefix.length;
+      textarea.selectionEnd = start + prefix.length + selectedText.length;
+    });
+  }
+
+  insertList(card: Card, field: 'term' | 'definition', bulleted: boolean): void {
+    const textareas = field === 'term' ? this.termTextareas : this.definitionTextareas;
+    const textareaIndex = this.cards.findIndex(c => c.id === card.id);
+    if (textareaIndex === -1) return;
+
+    const textarea = textareas.toArray()[textareaIndex]?.nativeElement as HTMLTextAreaElement;
+    if (!textarea) return;
+
+    // Get current selection
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = card[field].substring(start, end);
+
+    // Create list from selection
+    let listItems = selectedText.split('\n').filter(line => line.trim());
+    if (listItems.length === 0) {
+      // If nothing selected, insert a placeholder list
+      listItems = ['Item 1', 'Item 2', 'Item 3'];
+    }
+
+    // Format the list
+    const formattedList = listItems
+      .map((item, index) => bulleted ? `- ${item}` : `${index + 1}. ${item}`)
+      .join('\n');
+
+    // Create the new text
+    const newText = card[field].substring(0, start) +
+      formattedList +
+      card[field].substring(end);
+
+    // Update model
+    card[field] = newText;
+
+    // Set focus back to textarea
+    setTimeout(() => {
+      textarea.focus();
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+    });
   }
 }
