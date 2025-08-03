@@ -3,6 +3,8 @@
   height: calc(100vh - 64px);
   /* Subtract toolbar height */
   overflow: hidden;
+  background-color: #fff8f8;
+  width: 100%;
 }
 
 .content-area {
@@ -31,7 +33,28 @@
 }
 
 @media (max-width: 768px) {
+  .home-container {
+    height: calc(100vh - 56px); /* Altura da toolbar no mobile */
+    overflow: hidden;
+  }
+  
+  .content-area {
+    width: 95%;
+    padding: 16px 10px;
+    height: 100%;
+    overflow-y: auto;
+    /* Garante que o scroll funcione corretamente */
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 20px; /* Espaço extra na parte inferior */
+  }
+  
   .deck-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .section-title {
+    font-size: 20px;
+    margin-bottom: 16px;
   }
 }

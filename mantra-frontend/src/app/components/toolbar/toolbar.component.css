@@ -7,6 +7,8 @@ mat-toolbar {
   background-color: white;
   color: #333;
   padding-left: 0px;
+  position: relative;
+  z-index: 1000;
 }
 
 .logo-container {
@@ -53,13 +55,16 @@ mat-toolbar {
   .menu-container {
     color: #ffffff !important;
     background-color: #ffffff;
-    
   }
 
   mat-toolbar {
     background-color: white;
     color: #333;
     padding-left: 0px;
-    transform: translateY(40%);
+    height: 56px;
+    min-height: 56px;
+    position: relative;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 }
