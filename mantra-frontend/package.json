@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:github-pages": "ng build --configuration production --base-href /mantra-app/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:mantra-frontend": "node dist/mantra-frontend/server/server.mjs"
