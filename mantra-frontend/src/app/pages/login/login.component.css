@@ -4,11 +4,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #FFC8DD 0%,#dfbbdb 100%);
+  background: linear-gradient(135deg, #FFC8DD 0%, #FFE1CC 50%, #D0F4DE 100%);
   padding: 20px;
   box-sizing: border-box;
   margin: 0;
   position: relative;
+  padding-top: max(20px, env(safe-area-inset-top));
+  padding-left: max(20px, env(safe-area-inset-left));
+  padding-right: max(20px, env(safe-area-inset-right));
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
 }
 
 .login-card {

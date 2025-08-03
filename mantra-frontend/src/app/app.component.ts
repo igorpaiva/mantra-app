@@ -39,6 +39,7 @@ export class AppComponent {
     const currentUrl = url || this.router.url;
     const isAuthenticated = this.authService.checkAuth();
     
-    this.showNavigation = isAuthenticated && !currentUrl.includes('/login');
+    const isLoginRoute = currentUrl.includes('/login') || currentUrl === '/';
+    this.showNavigation = isAuthenticated && !isLoginRoute;
   }
 }

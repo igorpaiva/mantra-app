@@ -34,7 +34,7 @@
 
 @media (max-width: 768px) {
   .home-container {
-    height: calc(100vh - 56px); /* Altura da toolbar no mobile */
+    height: calc(100vh - 56px - env(safe-area-inset-top));
     overflow: hidden;
   }
   

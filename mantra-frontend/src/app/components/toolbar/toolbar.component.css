@@ -9,6 +9,8 @@ mat-toolbar {
   padding-left: 0px;
   position: relative;
   z-index: 1000;
+  padding-top: env(safe-area-inset-top);
+  min-height: calc(64px + env(safe-area-inset-top));
 }
 
 .logo-container {
@@ -61,10 +63,12 @@ mat-toolbar {
     background-color: white;
     color: #333;
     padding-left: 0px;
-    height: 56px;
-    min-height: 56px;
+    height: calc(56px + env(safe-area-inset-top));
+    min-height: calc(56px + env(safe-area-inset-top));
     position: relative;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Safe area específica para mobile */
+    padding-top: env(safe-area-inset-top);
   }
 }
