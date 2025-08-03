@@ -36,8 +36,12 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation 'org.modelmapper:modelmapper:2.1.1'
+	implementation 'org.flywaydb:flyway-core'
+	runtimeOnly("org.flywaydb:flyway-database-postgresql:11.10.5")
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	// H2 Database for tests
 	testImplementation 'com.h2database:h2'
+	testImplementation 'org.springframework.security:spring-security-test'
 }
 
 bootJar {

@@ -2,7 +2,6 @@ package com.briseware.mantra.controller;
 
 import com.briseware.mantra.dto.DeckDto;
 import com.briseware.mantra.service.DeckService;
-import com.briseware.mantra.util.ModelMapperUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
