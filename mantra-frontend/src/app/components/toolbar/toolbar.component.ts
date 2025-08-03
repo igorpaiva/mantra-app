@@ -4,14 +4,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SidenavService } from '../../services/sidenav.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-toolbar',
   standalone: true,
-  imports: [MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatDividerModule],
+  imports: [MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatDividerModule, RouterLink],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.css'
 })

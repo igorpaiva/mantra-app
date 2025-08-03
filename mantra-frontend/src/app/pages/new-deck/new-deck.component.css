@@ -151,6 +151,13 @@ h3 {
     line-height: 18px;
 }
 
+/* Mobile - esconder ferramentas markdown para economizar espaço */
+@media (max-width: 768px) {
+    .markdown-toolbar {
+        display: none;
+    }
+}
+
 /* Desktop specific styles */
 @media (min-width: 769px) {
     .new-deck-container {
