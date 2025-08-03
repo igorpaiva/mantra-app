@@ -16,7 +16,12 @@
         }
 
         @if (!isLoading() && currentCard()) {
-        <div #flashcardElement class="flashcard" (click)="flipCard()" [@flipState]="isFlipped() ? 'back' : 'front'">
+        <div #flashcardElement 
+             class="flashcard" 
+             (click)="flipCard()" 
+             (swipeleft)="onSwipeLeft()" 
+             (swiperight)="onSwipeRight()" 
+             [@flipState]="isFlipped() ? 'back' : 'front'">
             <div class="card-face front">
                 <div class="card-content">
                     <markdown [data]="currentCard()!.term"></markdown>
