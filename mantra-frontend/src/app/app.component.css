@@ -17,6 +17,11 @@
   background-color: #fff8f8;
 }
 
+.login-container {
+  height: 100vh;
+  overflow: hidden;
+}
+
 @media (max-width: 640px) {
   
   /* Prevent body scrolling when in study mode on mobile */

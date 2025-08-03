@@ -1,0 +1,229 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #FFC8DD 0%,#dfbbdb 100%);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.login-card {
+  max-width: 450px;
+  width: 100%;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.logo {
+  height: 80px;
+  width: auto;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.logo-section h1 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: #000;
+  margin: 0 0 8px 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #636363;
+  margin: 0;
+}
+
+.login-form {
+  background-color: #ffffff !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  border: none !important;
+}
+
+.login-form mat-card-content {
+  padding: 32px !important;
+}
+
+.form-fields {
+  margin-bottom: 24px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.full-width:last-child {
+  margin-bottom: 0;
+}
+
+/* Material Form Field Customization */
+.mat-mdc-form-field {
+  font-family: 'Nunito Sans', sans-serif !important;
+}
+
+.mat-mdc-form-field .mat-mdc-form-field-outline {
+  border-radius: 12px !important;
+}
+
+.mat-mdc-form-field-outline-thick {
+  border-color: #FFC8DD !important;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-form-field-outline-thick {
+  border-color: #FFC8DD !important;
+}
+
+.mat-mdc-form-field .mat-mdc-floating-label {
+  font-family: 'Nunito Sans', sans-serif !important;
+  font-weight: 600 !important;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-floating-label {
+  color: #FFC8DD !important;
+}
+
+.login-actions {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.login-button {
+  width: 100%;
+  height: 48px;
+  background-color: #FFC8DD !important;
+  color: #000 !important;
+  border-radius: 12px !important;
+  font-family: 'Nunito Sans', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  text-transform: none !important;
+  box-shadow: 0 4px 12px rgba(255, 200, 221, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.login-button:hover:not(:disabled) {
+  background-color: #FFB3D6 !important;
+  box-shadow: 0 6px 16px rgba(255, 200, 221, 0.4) !important;
+  transform: translateY(-1px);
+}
+
+.login-button:disabled {
+  background-color: #f0f0f0 !important;
+  color: #999 !important;
+  box-shadow: none !important;
+  cursor: not-allowed;
+}
+
+.loading-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.loading-icon {
+  animation: rotate 1s linear infinite;
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.demo-info {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.demo-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #636363;
+  margin: 0;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #FFC8DD;
+}
+
+.demo-text mat-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  color: #FFC8DD !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 16px;
+  }
+  
+  .login-card {
+    max-width: 100%;
+  }
+  
+  .logo {
+    height: 60px;
+  }
+  
+  .logo-section h1 {
+    font-size: 24px;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+  }
+  
+  .login-form mat-card-content {
+    padding: 24px !important;
+  }
+}
+
+/* Input focus styles */
+.mat-mdc-input-element:focus {
+  outline: none;
+}
+
+/* Material icons in form fields */
+.mat-mdc-form-field .mat-icon {
+  color: #636363 !important;
+}
+
+.mat-mdc-form-field.mat-focused .mat-icon {
+  color: #FFC8DD !important;
+}

@@ -3,8 +3,8 @@
         (click)="toggleSidenav()">
         <mat-icon>menu</mat-icon>
     </button>
-    <div class="logo-container" cursor="pointer" routerLink="/">
-        <img src="assets/mantra-logo.svg" alt="Mantra Logo" class="logo" routerLink="/">
+    <div class="logo-container" (click)="goToHome()">
+        <img src="assets/mantra-logo.svg" alt="Mantra Logo" class="logo">
     </div>
     <span class="example-spacer"></span>
 
@@ -19,7 +19,19 @@
         </button>
     </mat-menu>
 
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <button mat-icon-button class="example-icon" [matMenuTriggerFor]="userMenu" aria-label="User menu">
         <mat-icon>account_circle</mat-icon>
     </button>
+
+    <mat-menu #userMenu="matMenu" class="menu-container">
+        <div class="user-info">
+            <mat-icon>person</mat-icon>
+            <span>{{ userEmail || 'User' }}</span>
+        </div>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Sign out</span>
+        </button>
+    </mat-menu>
 </mat-toolbar>

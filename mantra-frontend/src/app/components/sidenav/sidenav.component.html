@@ -1,7 +1,7 @@
 <mat-drawer-container class="sidenav-container sidenav-toggle" [style.width.px]="isExpanded() ? 160 : 48">
     <mat-drawer #drawer class="sidenav" mode="side" opened [style.width.px]="isExpanded() ? 160 : 48">
         <mat-nav-list>
-            <mat-list-item routerLink="/" routerLinkActive="'active-link'">
+            <mat-list-item (click)="goToHome()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
                 <mat-icon matListItemIcon>home</mat-icon>
                 @if (isExpanded()) {
                 <div class="sidenav-font">Home</div>

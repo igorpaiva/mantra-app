@@ -1,0 +1,72 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="logo-section">
+      <img src="/assets/mantra-logo-login.svg" alt="Mantra Logo" class="logo">
+      <h1>Welcome to Mantra</h1>
+      <p class="subtitle">Repeat it until you memorize it!</p>
+    </div>
+
+    <mat-card class="login-form">
+      <mat-card-content>
+        <form (ngSubmit)="login()" #loginForm="ngForm">
+          <div class="form-fields">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Email</mat-label>
+              <input 
+                matInput 
+                type="email" 
+                [(ngModel)]="email" 
+                name="email" 
+                required
+                placeholder="Enter your email"
+                autocomplete="email">
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Password</mat-label>
+              <input 
+                matInput 
+                [type]="hidePassword ? 'password' : 'text'" 
+                [(ngModel)]="password" 
+                name="password" 
+                required
+                placeholder="Enter your password"
+                autocomplete="current-password">
+              <button 
+                mat-icon-button 
+                matSuffix 
+                type="button"
+                (click)="togglePasswordVisibility()"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hidePassword">
+                <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+
+          <div class="login-actions">
+            <button 
+              mat-raised-button 
+              type="submit" 
+              class="login-button"
+              [disabled]="isLoading || !loginForm.valid">
+              <span *ngIf="!isLoading">Sign In</span>
+              <span *ngIf="isLoading" class="loading-text">
+                <mat-icon class="loading-icon">hourglass_empty</mat-icon>
+                Signing in...
+              </span>
+            </button>
+          </div>
+        </form>
+
+        <div class="demo-info">
+          <p class="demo-text">
+            <mat-icon>info</mat-icon>
+            Demo mode: Use any email and password to sign in
+          </p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
