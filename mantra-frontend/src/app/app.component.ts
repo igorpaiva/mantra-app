@@ -21,19 +21,24 @@ export class AppComponent {
   private authService = inject(AuthService);
 
   constructor() {
-    // Escuta mudanças de rota para mostrar/esconder navegação
+    this.updateNavigationVisibility();
+
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        this.showNavigation = !event.url.includes('/login');
+        this.updateNavigationVisibility(event.url);
       });
 
-    // Reativo às mudanças no estado de autenticação
     effect(() => {
       const isAuth = this.authService.isAuthenticated();
-      if (!isAuth && !this.router.url.includes('/login')) {
-        this.showNavigation = false;
-      }
+      this.updateNavigationVisibility();
     });
+  }
+
+  private updateNavigationVisibility(url?: string) {
+    const currentUrl = url || this.router.url;
+    const isAuthenticated = this.authService.checkAuth();
+    
+    this.showNavigation = isAuthenticated && !currentUrl.includes('/login');
   }
 }
