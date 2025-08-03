@@ -1,15 +1,15 @@
-<mat-drawer-container class="sidenav-container sidenav-toggle" [style.width.px]="isExpanded ? 160 : 48">
-    <mat-drawer #drawer class="sidenav" mode="side" opened [style.width.px]="isExpanded ? 160 : 48">
+<mat-drawer-container class="sidenav-container sidenav-toggle" [style.width.px]="isExpanded() ? 160 : 48">
+    <mat-drawer #drawer class="sidenav" mode="side" opened [style.width.px]="isExpanded() ? 160 : 48">
         <mat-nav-list>
             <mat-list-item routerLink="/" routerLinkActive="'active-link'">
                 <mat-icon matListItemIcon>home</mat-icon>
-                @if (isExpanded) {
+                @if (isExpanded()) {
                 <div class="sidenav-font">Home</div>
                 }
             </mat-list-item>
             <mat-list-item>
                 <mat-icon matListItemIcon>folder</mat-icon>
-                @if (isExpanded) {
+                @if (isExpanded()) {
                 <div class="sidenav-font">My Library</div>
                 }
             </mat-list-item>

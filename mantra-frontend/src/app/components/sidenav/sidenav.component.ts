@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, signal, inject, OnDestroy } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SidenavService } from '../../services/sidenav.service';
-import { Subscription } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-sidenav',
@@ -19,24 +19,13 @@ import { Subscription } from 'rxjs';
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.css'
 })
-export class SidenavComponent implements OnInit, OnDestroy {
-  private subscription: Subscription = new Subscription();
+export class SidenavComponent {
+  private sidenavService = inject(SidenavService);
+  isExpanded = signal(false);
 
-  constructor(private sidenavService: SidenavService) { }
-
-  isExpanded = false;
-
-  ngOnInit() {
-    this.subscription = this.sidenavService.onToggle.subscribe(() => {
-      this.toggleSidenav();
-    });
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  toggleSidenav() {
-    this.isExpanded = !this.isExpanded;
+  constructor() {
+    this.sidenavService.onToggle
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => this.isExpanded.update(value => !value));
   }
 }

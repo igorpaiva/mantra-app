@@ -1,4 +1,4 @@
-import { Component, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import { Component, ViewChildren, QueryList, ElementRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -37,28 +37,22 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 export class NewDeckComponent {
   @ViewChildren('termTextarea') termTextareas!: QueryList<ElementRef>;
   @ViewChildren('definitionTextarea') definitionTextareas!: QueryList<ElementRef>;
-  // Form data
-  deckName: string = '';
-  deckDescription: string = '';
+  
+  deckName = '';
+  deckDescription = '';
   cards: Card[] = [];
   nextId = 1;
   isSubmitting = false;
-  newCard: Card | null = null;
-
   isEditMode = false;
   deckId: string | null = null;
-
   deletedCardIds: string[] = [];
-
   showPreviews = true;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private cardService: CardService,
-    private deckService: DeckService,
-    private snackBar: MatSnackBar
-  ) { }
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private cardService = inject(CardService);
+  private deckService = inject(DeckService);
+  private snackBar = inject(MatSnackBar);
 
   ngOnInit() {
     // Check if we're in edit mode by looking for an ID parameter
@@ -89,7 +83,6 @@ export class NewDeckComponent {
         this.nextId = this.cards.length > 0
           ? Math.max(...this.cards.map(card => card.cardNumber || 0)) + 1
           : 1;
-        console.log('Loaded deck for editing:', this.cards);
       },
       error: (error) => {
         console.error('Error loading deck for editing:', error);
@@ -99,13 +92,9 @@ export class NewDeckComponent {
     });
   }
 
-  generateUniqueId(): number {
-    return Date.now();
-  }
-
   addNewCard() {
-    this.newCard = {
-      id: this.generateUniqueId(), // Only used for local identification
+    const newCard: Card = {
+      id: Date.now(), // Simple unique ID for local identification
       term: '',
       definition: '',
       cardNumber: this.nextId++,
@@ -113,28 +102,20 @@ export class NewDeckComponent {
       deckId: this.isEditMode ? +this.deckId! : undefined
     };
 
-    this.cards = [...this.cards, this.newCard];
+    this.cards = [...this.cards, newCard];
   }
 
   removeCard(id: number) {
     const cardToRemove = this.cards.find(card => card.id === id);
 
-    console.log('Removing card:', cardToRemove);
-
-    if (cardToRemove && !cardToRemove.isNew) {
-      if (this.isEditMode) {
-        this.deletedCardIds.push(cardToRemove.id!.toString());
-
-        this.cardService.deleteCard(cardToRemove.id!.toString()).subscribe({
-          next: () => {
-            console.log(`Card ${cardToRemove.id?.toString()} deleted from server`);
-          },
-          error: (error) => {
-            console.error('Error deleting card:', error);
-            this.snackBar.open('Failed to delete card. It will be removed when you save the deck.', 'Close', { duration: 3000 });
-          }
-        });
-      }
+    if (cardToRemove && !cardToRemove.isNew && this.isEditMode) {
+      this.deletedCardIds.push(cardToRemove.id!.toString());
+      this.cardService.deleteCard(cardToRemove.id!.toString()).subscribe({
+        error: (error) => {
+          console.error('Error deleting card:', error);
+          this.snackBar.open('Failed to delete card. It will be removed when you save the deck.', 'Close', { duration: 3000 });
+        }
+      });
     }
 
     this.cards = this.cards.filter(card => card.id !== id);
@@ -197,29 +178,22 @@ export class NewDeckComponent {
     this.showPreviews = !this.showPreviews;
   }
 
-  insertMarkdown(card: Card, field: 'term' | 'definition', prefix: string, suffix: string): void {
-    // Get the textarea element
+  private getTextarea(card: Card, field: 'term' | 'definition'): HTMLTextAreaElement | null {
     const textareas = field === 'term' ? this.termTextareas : this.definitionTextareas;
     const textareaIndex = this.cards.findIndex(c => c.id === card.id);
-    if (textareaIndex === -1) return;
+    return textareaIndex !== -1 ? textareas.toArray()[textareaIndex]?.nativeElement || null : null;
+  }
 
-    const textarea = textareas.toArray()[textareaIndex]?.nativeElement as HTMLTextAreaElement;
+  insertMarkdown(card: Card, field: 'term' | 'definition', prefix: string, suffix: string): void {
+    const textarea = this.getTextarea(card, field);
     if (!textarea) return;
 
-    // Get current selection
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const selectedText = card[field].substring(start, end);
 
-    // Create the new text with markdown
-    const newText = card[field].substring(0, start) +
-      prefix + selectedText + suffix +
-      card[field].substring(end);
+    card[field] = card[field].substring(0, start) + prefix + selectedText + suffix + card[field].substring(end);
 
-    // Update model and selection
-    card[field] = newText;
-
-    // Set focus back to textarea
     setTimeout(() => {
       textarea.focus();
       textarea.selectionStart = start + prefix.length;
@@ -228,39 +202,20 @@ export class NewDeckComponent {
   }
 
   insertList(card: Card, field: 'term' | 'definition', bulleted: boolean): void {
-    const textareas = field === 'term' ? this.termTextareas : this.definitionTextareas;
-    const textareaIndex = this.cards.findIndex(c => c.id === card.id);
-    if (textareaIndex === -1) return;
-
-    const textarea = textareas.toArray()[textareaIndex]?.nativeElement as HTMLTextAreaElement;
+    const textarea = this.getTextarea(card, field);
     if (!textarea) return;
 
-    // Get current selection
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const selectedText = card[field].substring(start, end);
 
-    // Create list from selection
-    let listItems = selectedText.split('\n').filter(line => line.trim());
-    if (listItems.length === 0) {
-      // If nothing selected, insert a placeholder list
-      listItems = ['Item 1', 'Item 2', 'Item 3'];
-    }
-
-    // Format the list
+    const listItems = selectedText.split('\n').filter(line => line.trim()) || ['Item 1', 'Item 2', 'Item 3'];
     const formattedList = listItems
       .map((item, index) => bulleted ? `- ${item}` : `${index + 1}. ${item}`)
       .join('\n');
 
-    // Create the new text
-    const newText = card[field].substring(0, start) +
-      formattedList +
-      card[field].substring(end);
+    card[field] = card[field].substring(0, start) + formattedList + card[field].substring(end);
 
-    // Update model
-    card[field] = newText;
-
-    // Set focus back to textarea
     setTimeout(() => {
       textarea.focus();
       textarea.style.height = 'auto';

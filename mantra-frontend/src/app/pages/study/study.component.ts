@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, computed } from '@angular/core';
+import { Component, OnInit, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -53,12 +53,10 @@ export class StudyComponent implements OnInit {
   isFirstCard = computed(() => this.currentCardIndex() === 0);
   isLastCard = computed(() => this.currentCardIndex() === this.cards().length - 1);
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private deckService: DeckService,
-    private snackBar: MatSnackBar
-  ) { }
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private deckService = inject(DeckService);
+  private snackBar = inject(MatSnackBar);
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {

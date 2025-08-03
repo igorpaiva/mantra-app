@@ -1,4 +1,4 @@
-import { Component, input, EventEmitter, Output } from '@angular/core';
+import { Component, input, EventEmitter, Output, inject } from '@angular/core';
 import { Deck } from '../../model/deck.type';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -26,15 +26,12 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 })
 export class DeckItemComponent {
   deck = input.required<Deck>();
-
   @Output() deckDeleted = new EventEmitter<string>();
 
-  constructor(
-    private router: Router,
-    private dialog: MatDialog,
-    private deckService: DeckService,
-    private snackBar: MatSnackBar
-  ) { }
+  private router = inject(Router);
+  private dialog = inject(MatDialog);
+  private deckService = inject(DeckService);
+  private snackBar = inject(MatSnackBar);
 
   onEdit() {
     this.router.navigate(['/edit-deck', this.deck().id]);

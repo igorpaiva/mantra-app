@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,8 +14,7 @@ import { SidenavService } from '../../services/sidenav.service';
   styleUrl: './toolbar.component.css'
 })
 export class ToolbarComponent {
-
-  constructor(private sidenavService: SidenavService) { }
+  private sidenavService = inject(SidenavService);
 
   toggleSidenav() {
     this.sidenavService.toggle();
