@@ -1,6 +1,7 @@
 .new-deck-container {
     display: flex;
     min-height: calc(100vh - 64px);
+    width: 100%;
 }
 
 .content-area {
@@ -8,6 +9,8 @@
     padding: 24px;
     max-width: 1220px;
     margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .form-card {
@@ -146,4 +149,18 @@ h3 {
     height: 18px;
     width: 18px;
     line-height: 18px;
+}
+
+/* Desktop specific styles */
+@media (min-width: 769px) {
+    .new-deck-container {
+        display: block;
+        min-height: auto;
+        height: auto;
+    }
+    
+    .content-area {
+        padding: 24px;
+        padding-bottom: 40px; /* Extra space at bottom */
+    }
 }
