@@ -1,3 +1,13 @@
+@media (max-width: 640px) {
+  button[mat-icon-button] > mat-icon.menu-icon,
+  button[mat-icon-button] > mat-icon:contains('menu') {
+    display: none !important;
+  }
+  /* Alternativamente, para garantir que o primeiro botão seja oculto: */
+  button[mat-icon-button]:first-child {
+    display: none !important;
+  }
+}
 .example-spacer {
   flex: 1 1 auto;
   padding-left: 50px;

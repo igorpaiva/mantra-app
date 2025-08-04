@@ -31,9 +31,9 @@ export class AuthService {
   }
 
 
-  async login({ login, password }: { login: string; password: string }): Promise<void> {
+  async login({ login, password, isMobile }: { login: string; password: string; isMobile?: boolean }): Promise<void> {
     try {
-      const res: any = await this.http.post(`${this.apiUrl}/auth/login`, { login, password }).toPromise();
+      const res: any = await this.http.post(`${this.apiUrl}/auth/login`, { login, password, isMobile }).toPromise();
       localStorage.setItem('token', res.token);
       localStorage.setItem('isAuthenticated', 'true');
       localStorage.setItem('userEmail', res.user?.login || login);

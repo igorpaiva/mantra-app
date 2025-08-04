@@ -1,3 +1,12 @@
+.mat-mdc-input-element, input {
+  color: #222 !important;
+}
+.mat-mdc-form-field .mat-mdc-floating-label {
+  color: #222 !important;
+}
+.mat-mdc-form-field.mat-focused .mat-mdc-floating-label {
+  color: #222 !important;
+}
 .login-container {
   min-height: 100vh;
   width: 100vw;

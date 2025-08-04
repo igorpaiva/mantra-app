@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { isStandalonePWA } from '../../utils/pwa';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -44,8 +45,9 @@ export class LoginComponent {
       return;
     }
     this.isLoading = true;
+    const isMobile = isStandalonePWA();
     try {
-      await this.authService.login({ login: this.email, password: this.password });
+      await this.authService.login({ login: this.email, password: this.password, isMobile });
       this.snackBar.open(`Welcome back, ${this.email}!`, 'Close', { duration: 3000 });
       this.router.navigate(['/home']);
     } catch (err: any) {
