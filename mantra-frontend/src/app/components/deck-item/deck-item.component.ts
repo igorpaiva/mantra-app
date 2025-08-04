@@ -55,7 +55,6 @@ export class DeckItemComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // User confirmed deletion
         this.deckService.deleteDeck(String(this.deck().id)).subscribe({
           next: () => {
             this.snackBar.open('Deck deleted successfully', 'Close', { duration: 3000 });

@@ -55,7 +55,6 @@ export class NewDeckComponent {
   private snackBar = inject(MatSnackBar);
 
   ngOnInit() {
-    // Check if we're in edit mode by looking for an ID parameter
     this.route.paramMap.subscribe(params => {
       this.deckId = params.get('id');
 
@@ -94,7 +93,7 @@ export class NewDeckComponent {
 
   addNewCard() {
     const newCard: Card = {
-      id: Date.now(), // Simple unique ID for local identification
+      id: Date.now(),
       term: '',
       definition: '',
       cardNumber: this.nextId++,
@@ -128,7 +127,6 @@ export class NewDeckComponent {
   }
 
   prepareDeckForSubmission(): CreateDeckRequest {
-    // Filter out empty cards and format according to backend requirements
     const formattedCards = this.cards
       .filter(card => card.term.trim() || card.definition.trim())
       .map((card, index) => ({
@@ -155,7 +153,6 @@ export class NewDeckComponent {
     this.isSubmitting = true;
     const deckData = this.prepareDeckForSubmission();
 
-    // Choose whether to create or update based on edit mode
     const saveOperation = this.isEditMode && this.deckId
       ? this.deckService.updateDeck(this.deckId, deckData)
       : this.deckService.createDeck(deckData);

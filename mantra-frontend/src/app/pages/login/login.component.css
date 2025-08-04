@@ -166,32 +166,28 @@
   }
 }
 
-.demo-info {
+.register-link {
   text-align: center;
   margin-top: 16px;
 }
 
-.demo-text {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+.register-link p {
   font-family: 'Nunito Sans', sans-serif;
-  font-weight: 500;
   font-size: 14px;
   color: #636363;
   margin: 0;
-  padding: 12px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  border-left: 4px solid #FFC8DD;
 }
 
-.demo-text mat-icon {
-  font-size: 18px !important;
-  width: 18px !important;
-  height: 18px !important;
-  color: #FFC8DD !important;
+.register-link a {
+  color: #FFC8DD;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.register-link a:hover {
+  color: #ffafcc;
+  text-decoration: underline;
 }
 
 /* Mobile Responsiveness */

@@ -35,24 +35,20 @@ export class LoginComponent {
   private snackBar = inject(MatSnackBar);
   private authService = inject(AuthService);
 
-  login() {
+  async login() {
     if (!this.email || !this.password) {
       this.snackBar.open('Please fill in all fields', 'Close', { duration: 3000 });
       return;
     }
-
     this.isLoading = true;
-
-    // Mock login - qualquer email/senha funciona por enquanto
-    setTimeout(() => {
-      this.isLoading = false;
-      
-      // Usa o serviço de autenticação
-      this.authService.login(this.email);
-      
+    try {
+      await this.authService.login({ login: this.email, password: this.password });
       this.snackBar.open(`Welcome back, ${this.email}!`, 'Close', { duration: 3000 });
       this.router.navigate(['/home']);
-    }, 1500); // Simula delay de rede
+    } catch (err: any) {
+      this.snackBar.open(err?.error?.message || 'Authentication failed', 'Close', { duration: 4000 });
+    }
+    this.isLoading = false;
   }
 
   togglePasswordVisibility() {

@@ -1,0 +1,79 @@
+/* Estilos copiados da página de login, exceto cores de fundo */
+.register-container {
+  max-width: 400px;
+  margin: 48px auto;
+  padding: 32px 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  margin-bottom: 24px;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus {
+  border-color: #ffafcc;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #ffafcc;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #d90429;
+  margin-top: 12px;
+  text-align: center;
+}
+
+.login-link {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.login-link a {
+  color: #333;
+  text-decoration: underline;
+  font-size: 1rem;
+}

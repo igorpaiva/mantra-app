@@ -201,14 +201,14 @@ export class StudyComponent implements OnInit, AfterViewInit {
   nextCard() {
     if (!this.isLastCard()) {
       this.currentCardIndex.update(index => index + 1);
-      this.isFlipped.set(false); // Reset to front side
+      this.isFlipped.set(false);
     }
   }
 
   previousCard() {
     if (!this.isFirstCard()) {
       this.currentCardIndex.update(index => index - 1);
-      this.isFlipped.set(false); // Reset to front side
+      this.isFlipped.set(false);
     }
   }
 

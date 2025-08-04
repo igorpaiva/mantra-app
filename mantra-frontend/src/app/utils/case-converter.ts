@@ -11,10 +11,8 @@ export function camelToSnakeCase(obj: any): any {
     }
 
     return Object.keys(obj).reduce((result, key) => {
-        // Convert key from camelCase to snake_case
         const snakeKey = key.replace(/([A-Z])/g, '_$1').toLowerCase();
 
-        // Convert value recursively if it's an object or array
         const value = obj[key];
         result[snakeKey] = camelToSnakeCase(value);
 

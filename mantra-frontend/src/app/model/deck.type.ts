@@ -10,5 +10,5 @@ export type Deck = {
 export interface CreateDeckRequest {
     name: string;
     description: string;
-    cards: Omit<Card, 'id'>[];  // Remove local 'id' property when sending to server
+    cards: Omit<Card, 'id'>[];
 }
