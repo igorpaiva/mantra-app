@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { logError } from '../../utils/error-handler';
 
 @Component({
   selector: 'app-login',
@@ -48,7 +49,10 @@ export class LoginComponent {
       this.snackBar.open(`Welcome back, ${this.email}!`, 'Close', { duration: 3000 });
       this.router.navigate(['/home']);
     } catch (err: any) {
-      this.snackBar.open(err?.error?.message || 'Authentication failed', 'Close', { duration: 4000 });
+      logError('LoginComponent.login', err);
+      // The error message is already processed by AuthService
+      const errorMessage = err.message || 'Authentication failed';
+      this.snackBar.open(errorMessage, 'Close', { duration: 4000 });
     }
     this.isLoading = false;
   }

@@ -9,6 +9,7 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DeckService } from '../../services/deck.service';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { extractErrorMessage, logError } from '../../utils/error-handler';
 
 @Component({
   selector: 'app-deck-item',
@@ -61,8 +62,9 @@ export class DeckItemComponent {
             this.deckDeleted.emit(String(this.deck().id));
           },
           error: (error) => {
-            console.error('Error deleting deck:', error);
-            this.snackBar.open('Failed to delete deck. Please try again.', 'Close', { duration: 3000 });
+            logError('DeckItemComponent.deleteDeck', error);
+            const errorMessage = extractErrorMessage(error);
+            this.snackBar.open(errorMessage, 'Close', { duration: 4000 });
           }
         });
       }

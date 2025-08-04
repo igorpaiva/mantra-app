@@ -10,6 +10,7 @@ import { Card } from '../../model/card.type';
 import { Deck } from '../../model/deck.type';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MarkdownComponent } from 'ngx-markdown';
+import { extractErrorMessage, logError } from '../../utils/error-handler';
 
 @Component({
   selector: 'app-study',
@@ -187,8 +188,9 @@ export class StudyComponent implements OnInit, AfterViewInit {
         }
       },
       error: (error) => {
-        console.error('Error loading deck:', error);
-        this.snackBar.open('Error loading deck', 'Close', { duration: 3000 });
+        logError('StudyComponent.loadDeck', error);
+        const errorMessage = extractErrorMessage(error);
+        this.snackBar.open(errorMessage, 'Close', { duration: 4000 });
         this.router.navigate(['/home']);
       }
     });

@@ -1,7 +1,8 @@
 import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { extractErrorMessage, logError } from '../utils/error-handler';
 
 @Injectable({
   providedIn: 'root'
@@ -38,16 +39,20 @@ export class AuthService {
       localStorage.setItem('userEmail', res.user?.login || login);
       this.isAuthenticatedSignal.set(true);
       this.userEmailSignal.set(res.user?.login || login);
-    } catch (err) {
-      throw err;
+    } catch (err: any) {
+      logError('AuthService.login', err);
+      const errorMessage = extractErrorMessage(err);
+      throw new Error(errorMessage);
     }
   }
 
   async register({ login, password, role }: { login: string; password: string; role: string }): Promise<void> {
     try {
       await this.http.post(`${this.apiUrl}/auth/register`, { login, password, role }).toPromise();
-    } catch (err) {
-      throw err;
+    } catch (err: any) {
+      logError('AuthService.register', err);
+      const errorMessage = extractErrorMessage(err);
+      throw new Error(errorMessage);
     }
   }
 

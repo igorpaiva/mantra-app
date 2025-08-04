@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { logError } from '../../utils/error-handler';
 
 @Component({
   selector: 'app-register',
@@ -36,10 +37,13 @@ export class RegisterComponent {
     const { login, password } = this.registerForm.value;
     
     try {
-      await this.auth.register({ login, password, role: 'USER' });
+      await this.auth.register({ login, password, role: 'user' });
       this.router.navigate(['/login']);
     } catch (err: any) {
-      this.error.set(err?.error?.message || 'Registration failed. Please try again.');
+      logError('RegisterComponent.onSubmit', err);
+      // The error message is already processed by AuthService
+      const errorMessage = err.message || 'Registration failed. Please try again.';
+      this.error.set(errorMessage);
     }
     
     this.loading.set(false);

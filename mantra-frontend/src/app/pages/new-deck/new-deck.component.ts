@@ -15,6 +15,7 @@ import { CardService } from '../../services/card.service';
 import { ActivatedRoute } from '@angular/router';
 import { MarkdownComponent } from 'ngx-markdown';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { extractErrorMessage, logError } from '../../utils/error-handler';
 
 @Component({
   selector: 'app-new-deck',
@@ -84,8 +85,9 @@ export class NewDeckComponent {
           : 1;
       },
       error: (error) => {
-        console.error('Error loading deck for editing:', error);
-        this.snackBar.open('Failed to load deck for editing', 'Close', { duration: 3000 });
+        logError('NewDeckComponent.loadDeckForEdit', error);
+        const errorMessage = extractErrorMessage(error);
+        this.snackBar.open(errorMessage, 'Close', { duration: 4000 });
         this.router.navigate(['/home']);
       }
     });
@@ -111,8 +113,9 @@ export class NewDeckComponent {
       this.deletedCardIds.push(cardToRemove.id!.toString());
       this.cardService.deleteCard(cardToRemove.id!.toString()).subscribe({
         error: (error) => {
-          console.error('Error deleting card:', error);
-          this.snackBar.open('Failed to delete card. It will be removed when you save the deck.', 'Close', { duration: 3000 });
+          logError('NewDeckComponent.removeCard', error);
+          const errorMessage = extractErrorMessage(error);
+          this.snackBar.open(`Failed to delete card: ${errorMessage}`, 'Close', { duration: 4000 });
         }
       });
     }
@@ -164,9 +167,10 @@ export class NewDeckComponent {
         this.router.navigate(['/home']);
       },
       error: (error) => {
-        console.error(`Error ${this.isEditMode ? 'updating' : 'creating'} deck:`, error);
+        logError(`NewDeckComponent.${this.isEditMode ? 'updateDeck' : 'createDeck'}`, error);
         this.isSubmitting = false;
-        this.snackBar.open(`Failed to ${this.isEditMode ? 'update' : 'create'} deck. Please try again.`, 'Close', { duration: 3000 });
+        const errorMessage = extractErrorMessage(error);
+        this.snackBar.open(errorMessage, 'Close', { duration: 4000 });
       }
     });
   }

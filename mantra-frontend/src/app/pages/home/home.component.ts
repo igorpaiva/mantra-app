@@ -3,6 +3,7 @@ import { DeckService } from '../../services/deck.service';
 import { Deck } from '../../model/deck.type';
 import { catchError } from 'rxjs';
 import { DeckItemComponent } from '../../components/deck-item/deck-item.component';
+import { extractErrorMessage, logError } from '../../utils/error-handler';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit {
     this.deckService.getDecks()
       .pipe(
         catchError((error) => {
-          console.error(error);
+          logError('HomeComponent.loadDecks', error);
           throw error;
         })
       )
