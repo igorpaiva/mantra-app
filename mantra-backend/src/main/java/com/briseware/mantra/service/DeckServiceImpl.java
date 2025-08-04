@@ -5,10 +5,12 @@ import com.briseware.mantra.dto.DeckDto;
 import com.briseware.mantra.exception.ResourceNotFoundException;
 import com.briseware.mantra.model.Card;
 import com.briseware.mantra.model.Deck;
+import com.briseware.mantra.model.User;
 import com.briseware.mantra.repository.CardRepository;
 import com.briseware.mantra.repository.DeckRepository;
 import com.briseware.mantra.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,7 +31,8 @@ public class DeckServiceImpl implements DeckService {
     }
 
     public List<DeckDto> getAll() {
-        List<Deck> decks = deckRepository.findAll();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Deck> decks = deckRepository.findAllByUserId(user.getId());
         List<DeckDto> deckDtoList = ModelMapperUtil.toList(decks, DeckDto.class);
         for (DeckDto deck : deckDtoList) {
             if (deck.getCards() != null) {
@@ -42,6 +45,10 @@ public class DeckServiceImpl implements DeckService {
     public DeckDto get(Long id) {
         Deck deck = deckRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No deck found with id: " + id));
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!deck.getUser().getId().equals(user.getId())) {
+            throw new ResourceNotFoundException("The user has no deck with id: " + id);
+        }
         DeckDto deckDto = ModelMapperUtil.mapTo(deck, DeckDto.class);
         if (deck.getCards() != null) {
             deckDto.setCards(setCardsDtoDeckId(deckDto)); ;
@@ -51,6 +58,8 @@ public class DeckServiceImpl implements DeckService {
 
     public DeckDto create(DeckDto deckDto) {
         Deck deck = ModelMapperUtil.mapTo(deckDto, Deck.class);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        deck.setUser(user);
         Deck savedDeck = deckRepository.save(deck);
         if (deck.getCards() != null) {
             deckDto.setCards(setCardsDeck(savedDeck));
