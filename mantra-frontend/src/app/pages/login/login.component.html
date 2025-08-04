@@ -51,11 +51,15 @@
               type="submit" 
               class="login-button"
               [disabled]="isLoading || !loginForm.valid">
-              <span *ngIf="!isLoading">Sign In</span>
-              <span *ngIf="isLoading" class="loading-text">
-                <mat-icon class="loading-icon">hourglass_empty</mat-icon>
-                Signing in...
-              </span>
+              @if (!isLoading) {
+                <span>Sign In</span>
+              }
+              @if (isLoading) {
+                <span class="loading-text">
+                  <mat-icon class="loading-icon">hourglass_empty</mat-icon>
+                  Signing in...
+                </span>
+              }
             </button>
           </div>
         </form>
