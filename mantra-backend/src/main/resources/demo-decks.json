@@ -1,0 +1,97 @@
+[
+  {
+    "name": "English Vocabulary - Advanced",
+    "description": "Challenging English words to expand your vocabulary",
+    "cards": [
+      { "term": "Ubiquitous", "definition": "Present, appearing, or found everywhere" },
+      { "term": "Ephemeral", "definition": "Lasting for a very short time" },
+      { "term": "Serendipity", "definition": "The occurrence of events by chance in a happy way" },
+      { "term": "Mellifluous", "definition": "Sweet or musical; pleasant to hear" },
+      { "term": "Quintessential", "definition": "Representing the most perfect example of a quality" },
+      { "term": "Pernicious", "definition": "Having a harmful effect, especially in a gradual way" },
+      { "term": "Cacophony", "definition": "A harsh, discordant mixture of sounds" },
+      { "term": "Ineffable", "definition": "Too great or extreme to be expressed in words" },
+      { "term": "Perspicacious", "definition": "Having a ready insight into things; shrewd" },
+      { "term": "Surreptitious", "definition": "Kept secret, especially because it's unauthorized" }
+    ]
+  },
+  {
+    "name": "World Geography",
+    "description": "Countries, capitals, and geographical features",
+    "cards": [
+      { "term": "Capital of Australia", "definition": "Canberra" },
+      { "term": "Longest river in the world", "definition": "Nile River" },
+      { "term": "Capital of Kazakhstan", "definition": "Nur-Sultan (formerly Astana)" },
+      { "term": "Smallest country in the world", "definition": "Vatican City" },
+      { "term": "Capital of Mongolia", "definition": "Ulaanbaatar" },
+      { "term": "Highest mountain in Africa", "definition": "Mount Kilimanjaro" },
+      { "term": "Capital of Myanmar", "definition": "Naypyidaw" },
+      { "term": "Largest desert in the world", "definition": "Antarctica (cold desert)" },
+      { "term": "Capital of Bhutan", "definition": "Thimphu" },
+      { "term": "Deepest ocean trench", "definition": "Mariana Trench" }
+    ]
+  },
+  {
+    "name": "Programming Concepts",
+    "description": "Essential programming terms and concepts",
+    "cards": [
+      { "term": "Polymorphism", "definition": "The ability of objects to take on multiple forms" },
+      { "term": "Encapsulation", "definition": "Bundling data and methods that operate on that data" },
+      { "term": "Recursion", "definition": "A function that calls itself to solve a problem" },
+      { "term": "Big O Notation", "definition": "Mathematical notation describing algorithm efficiency" },
+      { "term": "Dependency Injection", "definition": "Providing dependencies to an object from external sources" },
+      { "term": "SOLID Principles", "definition": "Five design principles for maintainable software" },
+      { "term": "API", "definition": "Application Programming Interface - set of protocols for building software" },
+      { "term": "Middleware", "definition": "Software that connects different applications or services" },
+      { "term": "Asynchronous Programming", "definition": "Programming model allowing operations to run concurrently" },
+      { "term": "Design Pattern", "definition": "Reusable solution to commonly occurring problems in software design" }
+    ]
+  },
+  {
+    "name": "Spanish for Travelers",
+    "description": "Essential Spanish phrases for traveling",
+    "cards": [
+      { "term": "¿Dónde está el baño?", "definition": "Where is the bathroom?" },
+      { "term": "¿Cuánto cuesta?", "definition": "How much does it cost?" },
+      { "term": "No hablo español muy bien", "definition": "I don't speak Spanish very well" },
+      { "term": "¿Puede ayudarme?", "definition": "Can you help me?" },
+      { "term": "¿Dónde está la estación de tren?", "definition": "Where is the train station?" },
+      { "term": "Tengo una reserva", "definition": "I have a reservation" },
+      { "term": "¿Acepta tarjetas de crédito?", "definition": "Do you accept credit cards?" },
+      { "term": "¿Qué recomienda?", "definition": "What do you recommend?" },
+      { "term": "¿Habla inglés?", "definition": "Do you speak English?" },
+      { "term": "Disculpe, ¿dónde está...?", "definition": "Excuse me, where is...?" }
+    ]
+  },
+  {
+    "name": "Science Facts",
+    "description": "Interesting facts about science and nature",
+    "cards": [
+      { "term": "What is the powerhouse of the cell?", "definition": "Mitochondria" },
+      { "term": "What gas makes up 78% of Earth's atmosphere?", "definition": "Nitrogen" },
+      { "term": "What is the hardest natural substance?", "definition": "Diamond" },
+      { "term": "How many bones are in an adult human body?", "definition": "206 bones" },
+      { "term": "What is the speed of light in vacuum?", "definition": "299,792,458 meters per second" },
+      { "term": "What element has the chemical symbol 'Au'?", "definition": "Gold" },
+      { "term": "What is the largest planet in our solar system?", "definition": "Jupiter" },
+      { "term": "What type of animal is a Komodo dragon?", "definition": "Lizard" },
+      { "term": "What is the study of earthquakes called?", "definition": "Seismology" },
+      { "term": "How many chambers does a human heart have?", "definition": "Four chambers" }
+    ]
+  },
+  {
+    "name": "Welcome to Mantra",
+    "description": "Learn how to use the Mantra app and get the most out of your study experience!",
+    "cards": [
+      { "term": "What is Mantra?", "definition": "Mantra is a flashcard app to help you memorize anything efficiently." },
+      { "term": "How to create a deck?", "definition": "Click on 'Create new deck' in the menu to start your own collection of cards." },
+      { "term": "How to add cards?", "definition": "Inside a deck, use the 'Add card' button to create new flashcards with terms and definitions." },
+      { "term": "How to study?", "definition": "Open a deck and click 'Study' to review cards in order." },
+      { "term": "Responsive design", "definition": "Mantra works great on desktop, tablet, and mobile devices." },
+      { "term": "Offline support", "definition": "You can install Mantra as a PWA and use it offline!" },
+      { "term": "User registration", "definition": "Sign up to save your decks and access them from any device." },
+      { "term": "Demo mode", "definition": "Try the app with demo decks before registering an account." },
+      { "term": "Need help?", "definition": "Check the help section or contact support for assistance." }
+    ]
+  }
+]

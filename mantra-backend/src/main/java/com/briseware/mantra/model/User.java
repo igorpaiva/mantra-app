@@ -22,11 +22,15 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+    @Column(unique = true, nullable = false)
     private String login;
     private String password;
     private Boolean isMobile;
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Deck> decks;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

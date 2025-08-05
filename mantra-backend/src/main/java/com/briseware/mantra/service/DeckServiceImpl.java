@@ -11,6 +11,7 @@ import com.briseware.mantra.repository.DeckRepository;
 import com.briseware.mantra.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,12 +23,14 @@ public class DeckServiceImpl implements DeckService {
     private final DeckRepository deckRepository;
     private final CardRepository cardRepository;
     private final CardService cardService;
+    private final AuthorizationService authorizationService;
 
     @Autowired
-    public DeckServiceImpl(DeckRepository deckRepository, CardRepository cardRepository, CardService cardService) {
+    public DeckServiceImpl(DeckRepository deckRepository, CardRepository cardRepository, CardService cardService, AuthorizationService authorizationService) {
         this.deckRepository = deckRepository;
         this.cardRepository = cardRepository;
         this.cardService = cardService;
+        this.authorizationService = authorizationService;
     }
 
     public List<DeckDto> getAll() {
@@ -51,7 +54,8 @@ public class DeckServiceImpl implements DeckService {
         }
         DeckDto deckDto = ModelMapperUtil.mapTo(deck, DeckDto.class);
         if (deck.getCards() != null) {
-            deckDto.setCards(setCardsDtoDeckId(deckDto)); ;
+            deckDto.setCards(setCardsDtoDeckId(deckDto));
+            ;
         }
         return deckDto;
     }
@@ -68,6 +72,18 @@ public class DeckServiceImpl implements DeckService {
         return deckDto;
     }
 
+    public DeckDto createDemoDecks(DeckDto deckDto, String login) {
+        Deck deck = ModelMapperUtil.mapTo(deckDto, Deck.class);
+        UserDetails user = authorizationService.loadUserByUsername(login);
+        deck.setUser(ModelMapperUtil.mapTo(user, User.class));
+        Deck savedDeck = deckRepository.save(deck);
+        if (deck.getCards() != null) {
+            deckDto.setCards(setCardsDeck(savedDeck));
+        }
+        deckDto.setId(savedDeck.getId());
+        return deckDto;
+    }
+
     public DeckDto update(Long id, DeckDto deckDto) {
         Deck existingDeck = deckRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No deck found with id: " + id));
@@ -75,9 +91,7 @@ public class DeckServiceImpl implements DeckService {
         for (CardDto cardDto : deckDto.getCards()) {
             if (cardDto.getId() != null) {
                 cardService.update(cardDto.getId(), cardDto);
-            }
-            else
-            {
+            } else {
                 Card newCard = ModelMapperUtil.mapTo(cardDto, Card.class);
                 newCard.setDeck(existingDeck);
                 cardService.createFromDeck(newCard);

@@ -2,7 +2,8 @@ package com.briseware.mantra.model;
 
 public enum UserRole {
     ADMIN("admin"),
-    USER("user");
+    USER("user"),
+    TRIAL("trial");
 
     private final String role;
 
