@@ -1,4 +1,4 @@
 package com.briseware.mantra.dto;
 
-public record AuthenticationDTO(String login, String password) {
+public record AuthenticationDTO(String login, String password, Boolean isMobile) {
 }

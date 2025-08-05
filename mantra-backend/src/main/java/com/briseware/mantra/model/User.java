@@ -24,6 +24,7 @@ public class User implements UserDetails {
 
     private String login;
     private String password;
+    private Boolean isMobile;
     @Enumerated(EnumType.STRING)
     private UserRole role;
 

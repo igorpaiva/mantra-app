@@ -14,15 +14,20 @@ import java.time.Instant;
 public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
-    public String generateToken(User user) {
-        try{
+
+    public String generateToken(User user, boolean isMobile) {
+        try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
-            return JWT.create()
+            var jwtBuilder = JWT.create()
                     .withIssuer("auth-api")
-                    .withSubject(user.getLogin())
-                    .withExpiresAt(generateExpirationTime())
-                    .sign(algorithm);
-        } catch (JWTCreationException ex){
+                    .withSubject(user.getLogin());
+
+            if (!isMobile) {
+                jwtBuilder.withExpiresAt(generateExpirationTime());
+            }
+
+            return jwtBuilder.sign(algorithm);
+        } catch (JWTCreationException ex) {
             throw new RuntimeException("Could not generate token", ex);
         }
     }
@@ -40,7 +45,7 @@ public class TokenService {
         }
     }
 
-    private Instant generateExpirationTime(){
+    private Instant generateExpirationTime() {
         return Instant.now().plusSeconds(7200);
     }
 }
