@@ -4,6 +4,12 @@
 
 Mantra is a modern web flashcards application that helps you memorize any content through repetition. With an intuitive interface, Mantra makes learning more efficient and fun.
 
+## 🌟 Live Demo
+
+**Try it now!** → [Click here!](https://igorpaiva.github.io/mantra-app/) ✨
+
+*No installation required - fully deployed and ready to use*
+
 [![Angular](https://img.shields.io/badge/Angular-19-DD0031?style=flat&logo=angular&logoColor=white)](https://angular.io/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.2-6DB33F?style=flat&logo=spring&logoColor=white)](https://spring.io/projects/spring-boot)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -46,13 +52,27 @@ Mantra is a modern web flashcards application that helps you memorize any conten
 ## 🖼️ Screenshots
 
 ### Desktop
-*[Space reserved for desktop screenshots]*
+<div align="center">
+  
+![Desktop Screenshot 1](./assets/screen1.png)
+*Home Dashboard*
 
-### Mobile
-*[Space reserved for mobile screenshots]*
+![Desktop Screenshot 2](./assets/screen2.png)
+*Study Mode*
+
+![Desktop Screenshot 3](./assets/screen3.png)
+*Study Mode*
+
+</div>
 
 ### Mobile Demo
-*[Space reserved for mobile GIF demonstrating functionality]*
+<div align="center">
+  
+<img src="./assets/mobile-demo.gif" alt="Mobile Demo" width="288">
+
+*Mobile experience with swipe gestures*
+
+</div>
 
 ## 🚀 Technologies Used
 
@@ -73,6 +93,23 @@ Mantra is a modern web flashcards application that helps you memorize any conten
 - **PostgreSQL** - Database
 - **Flyway** - Database migrations
 - **ModelMapper** - Object mapping
+
+## 🌐 Live Demo & Deployment
+
+This application is deployed and available online using modern cloud infrastructure:
+
+### 🚀 **Live Application**
+- **Frontend**: Deployed on [GitHub Pages](https://pages.github.com/) 
+- **Backend**: Dockerized and hosted on [Oracle Cloud Infrastructure](https://www.oracle.com/cloud/)
+- **Database**: [Neon](https://neon.tech/) - Serverless PostgreSQL
+
+### 🏗️ **Deployment Architecture**
+- **Frontend**: Static hosting with automatic deployment from GitHub repository
+- **Backend**: Docker container running on Oracle Cloud compute instance
+- **Database**: Neon's managed PostgreSQL with automatic scaling
+- **CI/CD**: GitHub Actions for automated deployments
+
+*Visit the live application to try out all features without any setup required!*
 
 ## 🛠️ Installation and Setup
 
