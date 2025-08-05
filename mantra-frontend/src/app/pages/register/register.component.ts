@@ -37,7 +37,7 @@ export class RegisterComponent {
     const { login, password } = this.registerForm.value;
     
     try {
-      await this.auth.register({ login, password, role: 'user' });
+      await this.auth.register({ login, password, role: 'USER' });
       this.router.navigate(['/login']);
     } catch (err: any) {
       logError('RegisterComponent.onSubmit', err);
