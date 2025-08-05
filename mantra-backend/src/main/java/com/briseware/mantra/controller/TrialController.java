@@ -1,34 +1,28 @@
 package com.briseware.mantra.controller;
 
 import com.briseware.mantra.dto.DeckDto;
-import com.briseware.mantra.model.Deck;
 import com.briseware.mantra.model.User;
 import com.briseware.mantra.model.UserRole;
 import com.briseware.mantra.service.AuthorizationService;
 import com.briseware.mantra.service.DeckService;
 import com.briseware.mantra.service.TokenService;
 import com.briseware.mantra.service.TrialService;
-import com.briseware.mantra.util.ModelMapperUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.benmanes.caffeine.cache.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/api/v1/try")
@@ -40,6 +34,8 @@ public class TrialController {
     private TokenService tokenService;
     @Autowired
     private AuthorizationService authorizationService;
+    @Autowired
+    private Cache<String, String> trialUserCache;
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     @Autowired
@@ -51,8 +47,6 @@ public class TrialController {
         ObjectMapper mapper = new ObjectMapper();
 
         User credentials = trialService.generateTrialUser();
-
-
         User trialUser = User.builder()
                 .login(credentials.getLogin())
                 .password(credentials.getPassword())
@@ -61,6 +55,8 @@ public class TrialController {
 
         String token = tokenService.generateToken(trialUser, false);
 
+        trialUserCache.put(trialUser.getLogin(), "active");
+
         Map<String, String> response = Map.of(
                 "login", trialUser.getLogin(),
                 "password", trialUser.getPassword(),
@@ -68,10 +64,6 @@ public class TrialController {
         );
 
         authorizationService.saveUser(trialUser);
-
-        scheduler.schedule(() -> {
-            authorizationService.deleteUserByLogin(trialUser.getLogin());
-        }, 5, TimeUnit.MINUTES);
 
         try {
             InputStream inputStream = getClass().getClassLoader().getResourceAsStream("demo-decks.json");

@@ -1,6 +1,7 @@
 package com.briseware.mantra.service;
 
 import com.briseware.mantra.model.User;
+import com.briseware.mantra.model.UserRole;
 import com.briseware.mantra.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AuthorizationService implements UserDetailsService {
@@ -27,5 +30,9 @@ public class AuthorizationService implements UserDetailsService {
     @Transactional
     public void deleteUserByLogin(String login) {
         userRepository.deleteByLogin(login);
+    }
+
+    public List<User> findAllTrialUsers() {
+        return userRepository.findByRole(UserRole.TRIAL);
     }
 }

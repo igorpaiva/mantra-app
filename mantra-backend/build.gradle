@@ -41,6 +41,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'com.auth0:java-jwt:4.5.0'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.19.0'
+	implementation("com.github.ben-manes.caffeine:caffeine:3.2.2")
 	// H2 Database for tests
 	testImplementation 'com.h2database:h2'
 	testImplementation 'org.springframework.security:spring-security-test'

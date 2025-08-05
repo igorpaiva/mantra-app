@@ -1,5 +1,20 @@
 [
   {
+    "name": "Welcome to Mantra",
+    "description": "Learn how to use the Mantra app and get the most out of your study experience!",
+    "cards": [
+      { "term": "What is Mantra?", "definition": "Mantra is a flashcard app to help you memorize anything efficiently." },
+      { "term": "How to create a deck?", "definition": "Click on 'Create new deck' in the menu to start your own collection of cards." },
+      { "term": "How to add cards?", "definition": "Inside a deck, use the 'Add card' button to create new flashcards with terms and definitions." },
+      { "term": "How to study?", "definition": "Open a deck and click 'Study' to review cards in order." },
+      { "term": "Responsive design", "definition": "Mantra works great on desktop, tablet, and mobile devices." },
+      { "term": "Offline support", "definition": "You can install Mantra as a PWA and use it offline!" },
+      { "term": "User registration", "definition": "Sign up to save your decks and access them from any device." },
+      { "term": "Demo mode", "definition": "Try the app with demo decks before registering an account." },
+      { "term": "Need help?", "definition": "Check the help section or contact support for assistance." }
+    ]
+  },
+  {
     "name": "English Vocabulary - Advanced",
     "description": "Challenging English words to expand your vocabulary",
     "cards": [
@@ -77,21 +92,6 @@
       { "term": "What type of animal is a Komodo dragon?", "definition": "Lizard" },
       { "term": "What is the study of earthquakes called?", "definition": "Seismology" },
       { "term": "How many chambers does a human heart have?", "definition": "Four chambers" }
-    ]
-  },
-  {
-    "name": "Welcome to Mantra",
-    "description": "Learn how to use the Mantra app and get the most out of your study experience!",
-    "cards": [
-      { "term": "What is Mantra?", "definition": "Mantra is a flashcard app to help you memorize anything efficiently." },
-      { "term": "How to create a deck?", "definition": "Click on 'Create new deck' in the menu to start your own collection of cards." },
-      { "term": "How to add cards?", "definition": "Inside a deck, use the 'Add card' button to create new flashcards with terms and definitions." },
-      { "term": "How to study?", "definition": "Open a deck and click 'Study' to review cards in order." },
-      { "term": "Responsive design", "definition": "Mantra works great on desktop, tablet, and mobile devices." },
-      { "term": "Offline support", "definition": "You can install Mantra as a PWA and use it offline!" },
-      { "term": "User registration", "definition": "Sign up to save your decks and access them from any device." },
-      { "term": "Demo mode", "definition": "Try the app with demo decks before registering an account." },
-      { "term": "Need help?", "definition": "Check the help section or contact support for assistance." }
     ]
   }
 ]
