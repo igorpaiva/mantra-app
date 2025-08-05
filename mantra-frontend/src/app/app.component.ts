@@ -2,6 +2,7 @@ import { Component, inject, effect } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { TrialBannerComponent } from './components/trial-banner/trial-banner.component';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { AuthService } from './services/auth.service';
@@ -9,7 +10,7 @@ import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, ToolbarComponent, SidenavComponent],
+  imports: [CommonModule, RouterOutlet, ToolbarComponent, SidenavComponent, TrialBannerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

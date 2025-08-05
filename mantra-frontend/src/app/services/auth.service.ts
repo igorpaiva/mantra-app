@@ -10,10 +10,12 @@ import { extractErrorMessage, logError } from '../utils/error-handler';
 export class AuthService {
   private isAuthenticatedSignal = signal<boolean>(false);
   private userEmailSignal = signal<string | null>(null);
+  private isTrialModeSignal = signal<boolean>(false);
   private apiUrl = environment.apiUrl;
 
   isAuthenticated = this.isAuthenticatedSignal.asReadonly();
   userEmail = this.userEmailSignal.asReadonly();
+  trialMode = this.isTrialModeSignal.asReadonly();
 
   constructor(private router: Router, private http: HttpClient) {
     this.checkStoredAuth();
@@ -23,11 +25,13 @@ export class AuthService {
     const token = localStorage.getItem('token');
     const isAuth = localStorage.getItem('isAuthenticated') === 'true';
     const email = localStorage.getItem('userEmail');
+    const isTrialMode = localStorage.getItem('isTrialMode') === 'true';
     
     const hasValidAuth = Boolean(token && isAuth);
     
     this.isAuthenticatedSignal.set(hasValidAuth);
     this.userEmailSignal.set(hasValidAuth ? email : null);
+    this.isTrialModeSignal.set(isTrialMode);
   }
 
 
@@ -56,13 +60,34 @@ export class AuthService {
     }
   }
 
+  async startTrial(): Promise<void> {
+    try {
+      const res: any = await this.http.post(`${this.apiUrl}/try`, {}).toPromise();
+      localStorage.setItem('token', res.token);
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('userEmail', 'trial@mantra.app');
+      localStorage.setItem('isTrialMode', 'true');
+      localStorage.setItem('trialStartTime', Date.now().toString());
+      this.isAuthenticatedSignal.set(true);
+      this.userEmailSignal.set('trial@mantra.app');
+      this.isTrialModeSignal.set(true);
+    } catch (err: any) {
+      logError('AuthService.startTrial', err);
+      const errorMessage = extractErrorMessage(err);
+      throw new Error(errorMessage);
+    }
+  }
+
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('userEmail');
+    localStorage.removeItem('isTrialMode');
+    localStorage.removeItem('trialStartTime');
     
     this.isAuthenticatedSignal.set(false);
     this.userEmailSignal.set(null);
+    this.isTrialModeSignal.set(false);
     
     this.router.navigate(['/login']);
   }
@@ -71,5 +96,9 @@ export class AuthService {
     const token = localStorage.getItem('token');
     const isAuth = localStorage.getItem('isAuthenticated') === 'true';
     return Boolean(token && isAuth);
+  }
+
+  isTrialMode(): boolean {
+    return localStorage.getItem('isTrialMode') === 'true';
   }
 }

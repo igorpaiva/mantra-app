@@ -8,6 +8,7 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DeckService } from '../../services/deck.service';
+import { AuthService } from '../../services/auth.service';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { extractErrorMessage, logError } from '../../utils/error-handler';
 
@@ -33,6 +34,11 @@ export class DeckItemComponent {
   private dialog = inject(MatDialog);
   private deckService = inject(DeckService);
   private snackBar = inject(MatSnackBar);
+  private authService = inject(AuthService);
+
+  get userName() {
+    return this.authService.userEmail() || 'User';
+  }
 
   onEdit() {
     this.router.navigate(['/edit-deck', this.deck().id]);

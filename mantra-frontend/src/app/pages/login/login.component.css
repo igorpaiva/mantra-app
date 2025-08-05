@@ -199,6 +199,32 @@
   text-decoration: underline;
 }
 
+.trial-section {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.trial-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 48px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.trial-button mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 480px) {
   .login-container {

@@ -19,6 +19,7 @@
   overflow-y: auto;
   background-color: #fff8f8;
   height: 100%;
+  padding-bottom: 60px; /* Space for trial banner */
 }
 
 /* Desktop - garantir scroll funcional */
