@@ -14,7 +14,7 @@ public class CacheConfig {
     @Bean
     public Cache<String, String> trialUserCache(AuthorizationService authorizationService) {
         return Caffeine.newBuilder()
-                .expireAfterWrite(1, TimeUnit.MINUTES)
+                .expireAfterWrite(5, TimeUnit.MINUTES)
                 .removalListener((String key, String value, RemovalCause cause) -> {
                     if (cause == RemovalCause.EXPIRED) {
                         authorizationService.deleteUserByLogin(key);
